@@ -13,9 +13,6 @@ public class CheckValue : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Value of Selector : {difficulty_selector.value}");
-        Debug.Log($"Value of Difficulty : {difficulty_text.text}");
-
         difficulty_selector.onValueChanged.AddListener((value) =>
         {
             // round to int to catch floating point problems.
@@ -24,6 +21,8 @@ public class CheckValue : MonoBehaviour
                 currentStep -= 1;
             }
             difficulty_text.text = "Niveau " + currentStep.ToString();
+            Debug.Log($"Value of Selector : {difficulty_selector.value}");
+            Debug.Log($"Value of Difficulty : {difficulty_text.text}");
         });
     }
 }
