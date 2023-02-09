@@ -1,15 +1,18 @@
 using Mirror;
 using UnityEngine;
+using System;
 
 namespace QuickStart
 {
     public class PlayerScript : NetworkBehaviour
     {
+
         public override void OnStartLocalPlayer()
         {
             Camera.main.transform.SetParent(transform);
             Camera.main.transform.localPosition = new Vector3(0, 4.5f, 0);
         }
+
 
         void Update()
         {
@@ -20,6 +23,12 @@ namespace QuickStart
 
             transform.Rotate(0, moveX, 0);
             transform.Translate(0, 0, moveZ);
+        
+            // var test = GameObject.Find("skyboxPlayer");
+            // if(test != null){
+            //     Debug.Log("UPDATE SKY !");
+            //     RenderSettings.skybox = test.GetComponent<CheckSkyBox>().skybox;
+            // }
         }
     }
 }

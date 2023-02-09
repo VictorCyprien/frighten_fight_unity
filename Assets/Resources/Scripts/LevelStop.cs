@@ -29,5 +29,10 @@ public class LevelStop : MonoBehaviour
         // Update SkyBox to default
         var skybox = Resources.Load("materials/default") as Material;
         RenderSettings.skybox = skybox;
+
+        // Update Sound and Skybox (CLIENT SIDE !)
+        GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
+        skyboxPlayer.AddComponent<DataSync>();
+        skyboxPlayer.GetComponent<DataSync>().DeleteData();
     }
 }

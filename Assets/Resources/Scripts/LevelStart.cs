@@ -31,37 +31,36 @@ public class LevelStart : MonoBehaviour
 
         AudioClip sound = null;
         Material skybox = null;
+        String sound_name = null;
+        String skybox_name = null;
 
         switch (levelChoice.tag)
         {
             case "space":
-                sound = Resources.Load("sounds/space") as AudioClip;
-                skybox = Resources.Load("materials/spaceview") as Material;
+                sound_name = "space";
+                skybox_name = "spaceview";
+                sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
+                skybox = Resources.Load($"materials/{skybox_name}") as Material;
                 break;
             default:
                 break;
         }
 
-        // var VueServeur = GameObject.Find("Player");
-        // VueServeur.GetComponent<CheckSkyBox>().sound = sound;
-        // VueServeur.GetComponent<CheckSkyBox>().skybox = skybox;
-
         Debug.Log(sound);
 
-        // Add music to play
-        GameObject m = new GameObject("Music");
-        m.AddComponent<AudioSource>();
-        m.GetComponent<AudioSource>().clip = sound;
-        m.GetComponent<AudioSource>().Play();
+        // Add music to play (server side)
+        GameObject music = new GameObject("Music");
+        music.AddComponent<AudioSource>();
+        music.GetComponent<AudioSource>().clip = sound;
+        music.GetComponent<AudioSource>().Play();
 
-        // Update Skybox
+        // Update Skybox (server side)
         RenderSettings.skybox = skybox;
 
-        var skyboxPlayer = GameObject.Find("SkyboxPlayer");
-        skyboxPlayer.AddComponent<CheckSkyBox>();
-        skyboxPlayer.GetComponent<CheckSkyBox>().sound = sound;
-        skyboxPlayer.GetComponent<CheckSkyBox>().skybox = skybox;
-        skyboxPlayer.GetComponent<CheckSkyBox>().apply();
+        // Update Sound and Skybox (CLIENT SIDE !)
+        GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
+        skyboxPlayer.AddComponent<DataSync>();
+        skyboxPlayer.GetComponent<DataSync>().UpdateData(sound_name, skybox_name);
     }
 
     // Update is called once per frame

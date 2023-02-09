@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using Mirror;
 
 
-public class CheckSkyBox : MonoBehaviour
+public class CheckSkyBox : NetworkBehaviour
 {
-    public AudioClip sound;
-    public Material skybox;
+
+    [ClientRpc]
+    public void updateSkyboxClient(){
+        GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
+        // skyboxPlayer.GetComponent<NetworkIdentity>().assetId = 608131090;
+        
+    }
     
     public void apply(){
         Debug.Log("APPLY NOW !");
-
-        RenderSettings.skybox = skybox;
+        // if(isServer){
+        //     Debug.Log("I'M SERVER !");
+        // }
+        updateSkyboxClient();
     }
 
 }
