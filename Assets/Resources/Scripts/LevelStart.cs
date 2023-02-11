@@ -39,12 +39,22 @@ public class LevelStart : MonoBehaviour
             case "space":
                 sound_name = "space";
                 skybox_name = "spaceview";
-                sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
-                skybox = Resources.Load($"materials/{skybox_name}") as Material;
                 break;
+            
+            case "arachnophobie":
+                sound_name = "space";
+                skybox_name = "jungle1view";
+                break;
+            
+            // Space level by default
             default:
+                sound_name = "space";
+                skybox_name = "spaceview";         
                 break;
         }
+        sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
+        skybox = Resources.Load($"materials/{skybox_name}") as Material;
+
 
         Debug.Log(sound);
 
