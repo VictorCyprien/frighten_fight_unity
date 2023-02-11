@@ -45,7 +45,12 @@ public class LevelStart : MonoBehaviour
                 sound_name = "space";
                 skybox_name = "jungle1view";
                 break;
-            
+
+            case "acrophobie":
+                sound_name = "space";
+                skybox_name = "Acrophobia1";
+                break;
+
             // Space level by default
             default:
                 sound_name = "space";
