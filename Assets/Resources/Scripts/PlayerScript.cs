@@ -24,11 +24,6 @@ namespace QuickStart
             transform.Rotate(0, moveX, 0);
             transform.Translate(0, 0, moveZ);
         
-            // var test = GameObject.Find("skyboxPlayer");
-            // if(test != null){
-            //     Debug.Log("UPDATE SKY !");
-            //     RenderSettings.skybox = test.GetComponent<CheckSkyBox>().skybox;
-            // }
         }
     }
 }
