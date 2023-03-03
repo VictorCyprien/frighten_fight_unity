@@ -42,18 +42,23 @@ public class LevelStart : MonoBehaviour
                 break;
             
             case "arachnophobie":
-                sound_name = "space";
+                sound_name = "jungle_sound_1";
                 skybox_name = "jungle1view";
                 break;
 
             case "acrophobie":
-                sound_name = "space";
+                sound_name = "acrophobie_sound_1";
                 skybox_name = "Acrophobia1";
+                break;
+
+            case "ophiophobie":
+                sound_name = "ophiophobie_sound_1";
+                skybox_name = "lac1view";
                 break;
 
             // Space level by default
             default:
-                sound_name = "space";
+                sound_name = "acrophobie_sound_1";
                 skybox_name = "spaceview";         
                 break;
         }
@@ -67,6 +72,7 @@ public class LevelStart : MonoBehaviour
         GameObject music = new GameObject("Music");
         music.AddComponent<AudioSource>();
         music.GetComponent<AudioSource>().clip = sound;
+        music.GetComponent<AudioSource>().loop = true;
         music.GetComponent<AudioSource>().Play();
 
         // Update Skybox (server side)
