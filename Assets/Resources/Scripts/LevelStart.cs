@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using Mirror;
 using System;
 
+using static LevelDifficulty;
+
 public class LevelStart : MonoBehaviour
 {
     public GameObject levelChoice;
@@ -34,37 +36,14 @@ public class LevelStart : MonoBehaviour
         String sound_name = null;
         String skybox_name = null;
 
-        switch (levelChoice.tag)
-        {
-            case "space":
-                sound_name = "space";
-                skybox_name = "spaceview";
-                break;
-            
-            case "arachnophobie":
-                sound_name = "jungle_sound_1";
-                skybox_name = "jungle1view";
-                break;
+        LevelDifficulty choice = new LevelDifficulty();
+        (skybox_name, sound_name) = choice.ChoiceLevelDifficulty(levelChoice.tag, level_difficulty);
 
-            case "acrophobie":
-                sound_name = "acrophobie_sound_1";
-                skybox_name = "Acrophobia1";
-                break;
+        Debug.Log(skybox_name);
+        Debug.Log(sound_name);
 
-            case "ophiophobie":
-                sound_name = "ophiophobie_sound_1";
-                skybox_name = "lac1view";
-                break;
-
-            // Space level by default
-            default:
-                sound_name = "acrophobie_sound_1";
-                skybox_name = "spaceview";         
-                break;
-        }
         sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
         skybox = Resources.Load($"materials/{skybox_name}") as Material;
-
 
         Debug.Log(sound);
 
