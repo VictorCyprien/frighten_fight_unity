@@ -25,7 +25,7 @@ public class LevelStart : MonoBehaviour
         var level_difficulty = Mathf.RoundToInt(difficulty.value / (1f / (float) difficulty.numberOfSteps)) + 1;
         
         if (difficulty.value > 0.5){
-            level_difficulty -= 1;
+            level_difficulty -= 3;
         }
 
         Debug.Log(levelChoice.tag);
