@@ -52,8 +52,7 @@ public class CheckValue : MonoBehaviour
         return msg;
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
         difficulty_selector.onValueChanged.AddListener((value) =>
         {
