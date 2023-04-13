@@ -19,10 +19,10 @@ namespace QuickStart
             if (!isLocalPlayer) { return; }
 
             float moveX = Input.GetAxis("Horizontal") * Time.deltaTime * 110.0f;
-            float moveZ = Input.GetAxis("Vertical") * Time.deltaTime * 4f;
+            float moveY = Input.GetAxis("Vertical") * Time.deltaTime * 105.0f;
 
             transform.Rotate(0, moveX, 0);
-            transform.Translate(0, 0, moveZ);
+            transform.Rotate(moveY, 0, 0);
         
         }
     }
