@@ -8,6 +8,8 @@ TagManager:
   - arachnophobie
   - acrophobie
   - ophiophobie
+  - Spider
+  - Snake
   layers:
   - Default
   - TransparentFX
