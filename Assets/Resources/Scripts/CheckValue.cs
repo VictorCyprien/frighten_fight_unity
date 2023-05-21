@@ -11,6 +11,9 @@ public class CheckValue : MonoBehaviour
     public TextMeshProUGUI difficulty_text;
     public TextMeshProUGUI description_text;
 
+    public int minValue = 1;
+    public int maxValue = 8;
+
     string build_new_description(int level_difficulty){
         string msg = "";
         
@@ -52,18 +55,16 @@ public class CheckValue : MonoBehaviour
         return msg;
     }
 
+    private void OnScrollbarValueChanged(float value)
+    {
+        int currentStep = Mathf.RoundToInt(value * (maxValue - minValue) + minValue);
+        difficulty_text.text = "Niveau " + currentStep.ToString();
+        description_text.text = build_new_description(currentStep);
+        Debug.Log($"Value of Difficulty : {difficulty_text.text}");
+    }
+
     void Start()
     {
-        difficulty_selector.onValueChanged.AddListener((value) =>
-        {
-            // round to int to catch floating point problems.
-            int currentStep = Mathf.RoundToInt(value / (1f / (float) difficulty_selector.numberOfSteps)) + 1;
-            if (value > 0.5){
-                currentStep -= 3;
-            }
-            difficulty_text.text = "Niveau " + currentStep.ToString();
-            description_text.text = build_new_description(currentStep);
-            Debug.Log($"Value of Difficulty : {difficulty_text.text}");
-        });
+        difficulty_selector.onValueChanged.AddListener(OnScrollbarValueChanged);
     }
 }

@@ -13,6 +13,9 @@ public class LevelStart : MonoBehaviour
     public Scrollbar difficulty;
     public Button startLevel;
 
+    public int minValue = 1;
+    public int maxValue = 8;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +25,7 @@ public class LevelStart : MonoBehaviour
 
     void LoadLevel(){
         // round to int to catch floating point problems.
-        var level_difficulty = Mathf.RoundToInt(difficulty.value / (1f / (float) difficulty.numberOfSteps)) + 1;
-        
-        if (difficulty.value > 0.5){
-            level_difficulty -= 3;
-        }
+        var level_difficulty = Mathf.RoundToInt(difficulty.value * (maxValue - minValue) + minValue);
 
         Debug.Log(levelChoice.tag);
         Debug.Log(level_difficulty);
