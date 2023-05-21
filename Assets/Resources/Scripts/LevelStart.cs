@@ -45,8 +45,6 @@ public class LevelStart : MonoBehaviour
         sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
         skybox = Resources.Load($"materials/{skybox_name}") as Material;
 
-        Debug.Log(sound);
-
         // Add music to play (server side)
         GameObject music = new GameObject("Music");
         music.AddComponent<AudioSource>();
@@ -61,6 +59,11 @@ public class LevelStart : MonoBehaviour
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
         skyboxPlayer.AddComponent<DataSync>();
         skyboxPlayer.GetComponent<DataSync>().UpdateData(sound_name, skybox_name);
+
+        // Update GameObject (CLIENT SIDE !)
+        GameObject phobiePlayer = GameObject.Find("phobiePlayer");
+        phobiePlayer.AddComponent<DataSync>();
+        phobiePlayer.GetComponent<DataSync>().UpdatePhobie(levelChoice.tag, level_difficulty);
     }
 
     // Update is called once per frame

@@ -30,9 +30,26 @@ public class LevelStop : MonoBehaviour
         var skybox = Resources.Load("materials/default") as Material;
         RenderSettings.skybox = skybox;
 
+        //Remove phobie GameObject
+        GameObject current_phobie = null;
+        current_phobie = GameObject.FindWithTag("Spider");
+
+        if (current_phobie == null) {
+            current_phobie = GameObject.FindWithTag("Snake");
+        }
+
+        if (current_phobie != null){
+            Destroy(current_phobie);
+        }
+
         // Update Sound and Skybox (CLIENT SIDE !)
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
         skyboxPlayer.AddComponent<DataSync>();
         skyboxPlayer.GetComponent<DataSync>().DeleteData();
+
+        // Update Gameobject (CLIENT SIDE !)
+        GameObject phobiePlayer = GameObject.Find("phobiePlayer");
+        phobiePlayer.AddComponent<DataSync>();
+        phobiePlayer.GetComponent<DataSync>().DeletePhobie();
     }
 }

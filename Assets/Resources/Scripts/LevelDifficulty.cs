@@ -7,12 +7,38 @@ public class LevelDifficulty : MonoBehaviour
     public (string, string) ChoiceLevelDifficulty(string level_type, int level_difficulty){
         string skybox_name = "";
         string sound_name = "";
+        GameObject current_phobie = null;
         
         switch (level_type)
         {   
             case "arachnophobie":
                 sound_name = "jungle_sound";
                 skybox_name = "jungle_view";
+
+                if(level_difficulty == 6){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_6") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.transform.position = spiderPosition;
+                }
+
+                if(level_difficulty == 7){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_7") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.transform.position = spiderPosition;
+                }
+
+                if(level_difficulty == 8){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_8") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.transform.position = spiderPosition;
+                }
+
                 break;
 
             case "acrophobie":
@@ -23,6 +49,31 @@ public class LevelDifficulty : MonoBehaviour
             case "ophiophobie":
                 sound_name = "ophiophobie_sound";
                 skybox_name = "ophiophobie_view";
+
+                if(level_difficulty == 6){
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_6") as GameObject;
+                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.transform.position = snakePosition;
+                }
+
+                if(level_difficulty == 7){
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_7") as GameObject;
+                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.transform.position = snakePosition;
+                }
+
+                if(level_difficulty == 8){
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_8") as GameObject;
+                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.transform.position = snakePosition;
+                }
+
                 break;
         }
         
