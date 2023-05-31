@@ -95,13 +95,13 @@ public class LevelDifficulty : MonoBehaviour
                 break;
             
             case 4:
-                sound_name += "_medium_4";
-                skybox_name += "_medium_4";
+                sound_name += "_medium_1";
+                skybox_name += "_medium_1";
                 break;
 
             case 5:
-                sound_name += "_medium_5";
-                skybox_name += "_medium_5";
+                sound_name += "_medium_2";
+                skybox_name += "_medium_2";
                 break;
 
             case 6:
