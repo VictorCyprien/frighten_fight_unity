@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: -3021466273357137595}
   - component: {fileID: 5050560793082438247}
   - component: {fileID: -2709762017060702168}
+  - component: {fileID: 1684981615468307496}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -181,8 +182,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81d00802bc48d2f48b63866b699ed3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 0}
-  skybox: {fileID: 0}
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0.1
+--- !u!114 &1684981615468307496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202057444579168739}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cf1756c0b979ee4fb0c4955adedc134, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202057445545954306
 GameObject:
   m_ObjectHideFlags: 0
