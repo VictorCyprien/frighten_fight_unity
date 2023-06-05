@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Mirror;
@@ -45,7 +46,7 @@ public class LevelStart : MonoBehaviour
         skybox = Resources.Load($"materials/{skybox_name}") as Material;
 
         // Add music to play (server side)
-        GameObject music = new GameObject("Music");
+        GameObject music = new GameObject("Music_server");
         music.AddComponent<AudioSource>();
         music.GetComponent<AudioSource>().clip = sound;
         music.GetComponent<AudioSource>().loop = true;
@@ -53,6 +54,12 @@ public class LevelStart : MonoBehaviour
 
         // Update Skybox (server side)
         RenderSettings.skybox = skybox;
+
+        // Reset comfort var (set to false) to avoid duplicate GameObject
+        var comfort = Resources
+            .FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(g=>g.CompareTag("Comfort"));
+        comfort.GetComponent<ComfortPlayer>().is_active = false;
 
         // Update Sound and Skybox (CLIENT SIDE !)
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");

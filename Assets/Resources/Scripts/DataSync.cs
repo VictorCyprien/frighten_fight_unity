@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Mirror;
 using System;
@@ -26,7 +27,7 @@ public class DataSync : NetworkBehaviour
 
         // Add music to play (client side)
         AudioClip sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
-        GameObject music = new GameObject("Music");
+        GameObject music = new GameObject("Music_client");
         music.AddComponent<AudioSource>();
         music.GetComponent<AudioSource>().clip = sound;
         music.GetComponent<AudioSource>().loop = true;
@@ -52,6 +53,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_client";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -60,6 +62,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_client";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -68,6 +71,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_client";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -82,6 +86,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_client";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -90,6 +95,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_client";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -98,6 +104,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_client";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -107,11 +114,14 @@ public class DataSync : NetworkBehaviour
 
     [ClientRpc]
     public void RemoveGameObject(){
-        GameObject current_phobie = null;
-        current_phobie = GameObject.FindWithTag("Spider");
+        var current_phobie = Resources
+            .FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(g=>g.CompareTag("Spider"));
 
         if (current_phobie == null) {
-            current_phobie = GameObject.FindWithTag("Snake");
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Snake"));
         }
 
         if (current_phobie != null){
@@ -122,7 +132,7 @@ public class DataSync : NetworkBehaviour
     [ClientRpc]
     public void DeleteSoundAndSkyBox(){
         // Get music GameObject
-        var music = GameObject.Find("Music");
+        var music = GameObject.Find("Music_client");
 
         // Get sound from GameObject
         var sound = music.GetComponent<AudioSource>();
@@ -136,6 +146,64 @@ public class DataSync : NetworkBehaviour
         // Update SkyBox to default
         var skybox = Resources.Load("materials/default") as Material;
         RenderSettings.skybox = skybox;
+    }
+
+    [ClientRpc]
+    public void DeactivateLevel(){
+        // Get music GameObject
+        var music = GameObject.Find("Music_client");
+
+        // Get sound from GameObject
+        var sound = music.GetComponent<AudioSource>();
+        sound.Pause();
+
+         // Apply default skybox for now
+        var skybox = Resources.Load("materials/default") as Material;
+        RenderSettings.skybox = skybox;
+
+        //Hide phobie GameObject
+        var current_phobie = Resources
+            .FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(g=>g.CompareTag("Spider"));
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Snake"));
+        }
+
+        if (current_phobie != null){
+            current_phobie.SetActive(false);
+        }
+    }
+
+    [ClientRpc]
+    public void ReactivateLevel(String previous_skybox){
+        // Get music GameObject
+        var music = GameObject.Find("Music_client");
+
+        // Get sound from GameObject
+        var sound = music.GetComponent<AudioSource>();
+        sound.UnPause();
+
+        // Reapply previous skybox
+        var previous_skybox_splited = previous_skybox.Split(" (")[0];
+        RenderSettings.skybox = Resources.Load($"materials/{previous_skybox_splited}") as Material;
+
+        //Show phobie GameObject
+        var current_phobie = Resources
+            .FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(g=>g.CompareTag("Spider"));
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Snake"));
+        }
+
+        if (current_phobie != null){
+            current_phobie.SetActive(true);
+        }
     }
 
     public void UpdateData(String sound_name, String skybox_name)
@@ -158,5 +226,17 @@ public class DataSync : NetworkBehaviour
     public void DeletePhobie(){
         Debug.Log("DeleteGameObject from client...");
         RemoveGameObject();
+    }
+
+    public void Comfort(bool is_active, String previous_skybox){
+        if (!is_active){
+            Debug.Log("Comfort from client...");
+            DeactivateLevel();
+            is_active = true;
+        } else {
+            Debug.Log("Reactive from client...");
+            ReactivateLevel(previous_skybox);
+            is_active = false;
+        }
     }
 }

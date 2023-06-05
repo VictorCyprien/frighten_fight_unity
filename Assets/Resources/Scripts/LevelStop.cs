@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class LevelStop : MonoBehaviour
 
     void StopLevel(){
         // Get music GameObject
-        var music = GameObject.Find("Music");
+        var music = GameObject.Find("Music_server");
 
         // Get sound from GameObject
         var sound = music.GetComponent<AudioSource>();
@@ -31,11 +32,14 @@ public class LevelStop : MonoBehaviour
         RenderSettings.skybox = skybox;
 
         //Remove phobie GameObject
-        GameObject current_phobie = null;
-        current_phobie = GameObject.FindWithTag("Spider");
+        var current_phobie = Resources
+            .FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(g=>g.CompareTag("Spider"));
 
         if (current_phobie == null) {
-            current_phobie = GameObject.FindWithTag("Snake");
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Snake"));
         }
 
         if (current_phobie != null){

@@ -20,6 +20,7 @@ public class LevelDifficulty : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_server";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -28,6 +29,7 @@ public class LevelDifficulty : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_server";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -36,6 +38,7 @@ public class LevelDifficulty : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_server";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -55,6 +58,7 @@ public class LevelDifficulty : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -63,6 +67,7 @@ public class LevelDifficulty : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -71,6 +76,7 @@ public class LevelDifficulty : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
