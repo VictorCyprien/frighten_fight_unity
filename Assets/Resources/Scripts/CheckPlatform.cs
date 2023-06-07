@@ -8,8 +8,8 @@ public class CheckPlatform : MonoBehaviour
 {
     public bool DEBUG;
     public GameObject networkManager;
-    public NetworkDiscovery discovery;
-    
+    private NetworkDiscovery discovery;
+
     // Start is called before the first frame update
     void Start()
     {
