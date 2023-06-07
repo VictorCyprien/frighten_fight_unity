@@ -7,7 +7,9 @@ using Mirror.Discovery;
 public class CheckPlatform : MonoBehaviour
 {
     public bool DEBUG;
-    public NetworkDiscovery networkDiscovery;
+    public GameObject networkManager;
+    public NetworkDiscovery discovery;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,8 @@ public class CheckPlatform : MonoBehaviour
         }
 
         RuntimePlatform platform = Application.platform;
-        
+        discovery = networkManager.GetComponent<NetworkDiscovery>();
+
         if (platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.WindowsPlayer)
         {
             Debug.Log("Application is running on Windows");
@@ -29,27 +32,33 @@ public class CheckPlatform : MonoBehaviour
             Debug.Log("Application is running on Android");
             Screen.orientation = ScreenOrientation.LandscapeLeft;
             SetupClient();
-            // networkDiscovery.StartAsClient();
         }
     }
 
     void SetupServer()
     {
         NetworkManager.singleton.StartServer();
+        discovery.AdvertiseServer();
+        Debug.Log("Server is ok !\nNow listening to connection...");
     }
 
     void SetupClient()
     {
-        //NetworkManager.singleton.StartClient();
-        networkDiscovery.Start();
+        Debug.Log(discovery);
+        discovery.StartDiscovery();
     }
 
     // Called when client found a server
-    void OnDiscoveredServer(DiscoveryResponse info)
+    public void OnDiscoveredServer(ServerResponse info)
     {
-        Debug.Log("Server discovered: " + info);
+        Debug.Log("HELLO, SERVER FOUND YOU BAKA !");
+        Debug.Log(info.EndPoint.Address.ToString());
+        Connect(info);
+    }
 
-        // Connect to server
-        // NetworkManager.singleton.StartClient(info);
+    void Connect(ServerResponse info)
+    {
+        discovery.StopDiscovery();
+        NetworkManager.singleton.StartClient(info.uri);
     }
 }
