@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09965189, g: 0.20040733, b: 0.3224823, a: 1}
+  m_IndirectSpecularColor: {r: 0.10065344, g: 0.2013317, b: 0.3223103, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -619,7 +619,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DEBUG: 0
   networkManager: {fileID: 952923643}
-  discovery: {fileID: 0}
 --- !u!1 &876476477
 GameObject:
   m_ObjectHideFlags: 0
@@ -849,18 +848,6 @@ MonoBehaviour:
   OnServerFound:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 952923648}
-        m_TargetAssemblyTypeName: Mirror.Discovery.NetworkDiscoveryHUD, Mirror.Components
-        m_MethodName: OnDiscoveredServer
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 733696350}
         m_TargetAssemblyTypeName: CheckPlatform, Assembly-CSharp
         m_MethodName: OnDiscoveredServer
