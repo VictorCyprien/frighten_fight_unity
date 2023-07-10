@@ -7,18 +7,6 @@ using System;
 
 public class DataSync : NetworkBehaviour
 {
-    [SyncVar]
-    public int num = 1;
-
-    [SyncVar]
-    public String sound = null;
-    
-    [SyncVar]
-    public String skybox = null;
-
-    [SyncVar]
-    public GameObject phobiePlayer = null;
-
 
     [ClientRpc]
     public void UpdateSoundAndSkybox(String sound_name, String skybox_name)
