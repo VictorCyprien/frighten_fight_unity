@@ -51,7 +51,6 @@ public class CheckPlatform : MonoBehaviour
     // Called when client found a server
     public void OnDiscoveredServer(ServerResponse info)
     {
-        Debug.Log("HELLO, SERVER FOUND YOU BAKA !");
         Debug.Log(info.EndPoint.Address.ToString());
         Connect(info);
     }

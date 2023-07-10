@@ -55,12 +55,6 @@ public class LevelStart : MonoBehaviour
         // Update Skybox (server side)
         RenderSettings.skybox = skybox;
 
-        // Reset comfort var (set to false) to avoid duplicate GameObject
-        var comfort = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Comfort"));
-        comfort.GetComponent<ComfortPlayer>().is_active = false;
-
         // Update Sound and Skybox (CLIENT SIDE !)
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
         skyboxPlayer.AddComponent<DataSync>();
@@ -70,11 +64,5 @@ public class LevelStart : MonoBehaviour
         GameObject phobiePlayer = GameObject.Find("phobiePlayer");
         phobiePlayer.AddComponent<DataSync>();
         phobiePlayer.GetComponent<DataSync>().UpdatePhobie(levelChoice.tag, level_difficulty);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

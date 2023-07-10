@@ -28,7 +28,7 @@ public class CheckValue : MonoBehaviour
                 break;
 
             case 3:
-                msg += "- Environnement moins tranquille\n- Une image lointaine qui invoque la phobie apparaît";
+                msg += "- Environnement moins tranquille\n- Une image lointaine qui évoque la phobie apparaît";
                 break;
 
             case 4:
