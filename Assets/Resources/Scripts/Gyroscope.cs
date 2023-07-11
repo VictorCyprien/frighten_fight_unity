@@ -12,34 +12,25 @@ public class Gyroscope : MonoBehaviour
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-
-        gyroControl = new GameObject("Gyro Control");
-        gyroControl.transform.position = transform.position;
-        transform.SetParent(gyroControl.transform);
-
         gyroEnabled = EnableGyro();
 
         // Ajustement de la rotation initiale pour la vue paysage
-        if (Screen.orientation == ScreenOrientation.LandscapeLeft)
-        {
-            initialRotation = Quaternion.Euler(0f, 0f, 90f);
-        }
-        else if (Screen.orientation == ScreenOrientation.LandscapeRight)
-        {
-            initialRotation = Quaternion.Euler(0f, 0f, -90f);
-        }
-        else
-        {
-            initialRotation = Quaternion.identity; // Vue portrait par défaut
-        }
+        initialRotation = Quaternion.Euler(-90f, 0f, 0f);
     }
 
     private bool EnableGyro()
     {
         if (SystemInfo.supportsGyroscope)
         {
+            // Enable gyro
             gyro = Input.gyro;
             gyro.enabled = true;
+
+            // Create new Gyro Object
+            gyroControl = new GameObject("Gyro Control");
+            gyroControl.transform.position = transform.position;
+            transform.SetParent(gyroControl.transform);
+
             return true;
         }
 
