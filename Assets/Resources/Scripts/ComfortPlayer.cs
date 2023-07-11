@@ -38,17 +38,17 @@ public class ComfortPlayer : MonoBehaviour
         switch(current_level.tag){
             case "arachnophobie":
                 Debug.Log("Comfort arachnophobie");
-                skybox = Resources.Load("materials/default") as Material;
+                skybox = Resources.Load("materials/comfort_arachnophobie") as Material;
                 break;
 
             case "acrophobie":
                 Debug.Log("Comfort acrophobie");
-                skybox = Resources.Load("materials/default") as Material;
+                skybox = Resources.Load("materials/comfort_acrophobie") as Material;
                 break;
 
             case "ophiophobie":
                 Debug.Log("Comfort ophiophobie");
-                skybox = Resources.Load("materials/default") as Material;
+                skybox = Resources.Load("materials/comfort_ophiophobie") as Material;
                 break;
 
             default:
