@@ -137,7 +137,7 @@ public class DataSync : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void DeactivateLevel(){
+    public void DeactivateLevel(String current_level){
         // Get music GameObject
         var music = GameObject.Find("Music_client");
 
@@ -145,8 +145,31 @@ public class DataSync : NetworkBehaviour
         var sound = music.GetComponent<AudioSource>();
         sound.Pause();
 
-         // Apply default skybox for now
-        var skybox = Resources.Load("materials/default") as Material;
+        // Apply default skybox in function of current phobie
+        Material skybox;
+        switch(current_level){
+            case "arachnophobie":
+                Debug.Log("Comfort arachnophobie");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+            case "acrophobie":
+                Debug.Log("Comfort acrophobie");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+            case "ophiophobie":
+                Debug.Log("Comfort ophiophobie");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+            default:
+                Debug.Log("This should not arrive...");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+        }
+
         RenderSettings.skybox = skybox;
 
         //Hide phobie GameObject
@@ -216,10 +239,10 @@ public class DataSync : NetworkBehaviour
         RemoveGameObject();
     }
 
-    public void Comfort(bool is_active, String previous_skybox){
+    public void Comfort(bool is_active, String previous_skybox, String current_level){
         if (!is_active){
             Debug.Log("Comfort from client...");
-            DeactivateLevel();
+            DeactivateLevel(current_level);
             is_active = true;
         } else {
             Debug.Log("Reactive from client...");

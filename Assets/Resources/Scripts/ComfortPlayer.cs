@@ -10,6 +10,7 @@ public class ComfortPlayer : MonoBehaviour
     public Button quit;
     public TextMeshProUGUI comfort_text;
     public bool is_active = false;
+    public GameObject current_level;
     private GameObject current_phobie = null;
     private Material previous_skybox = null;
 
@@ -30,9 +31,32 @@ public class ComfortPlayer : MonoBehaviour
         var sound = music.GetComponent<AudioSource>();
         sound.Pause();
 
-        // Apply default skybox for now
+        // Apply default skybox in function of current phobie
         previous_skybox = RenderSettings.skybox;
-        var skybox = Resources.Load("materials/default") as Material;
+        Material skybox;
+
+        switch(current_level.tag){
+            case "arachnophobie":
+                Debug.Log("Comfort arachnophobie");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+            case "acrophobie":
+                Debug.Log("Comfort acrophobie");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+            case "ophiophobie":
+                Debug.Log("Comfort ophiophobie");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+
+            default:
+                Debug.Log("This should not arrive...");
+                skybox = Resources.Load("materials/default") as Material;
+                break;
+        }
+
         RenderSettings.skybox = skybox;
 
         //Hide phobie GameObject
@@ -80,14 +104,14 @@ public class ComfortPlayer : MonoBehaviour
             DeactivateLevel();
             // Call comfort (CLIENT SIDE !)
             GameObject comfortPlayer = GameObject.Find("comfortPlayer");
-            comfortPlayer.GetComponent<DataSync>().Comfort(is_active, RenderSettings.skybox.ToString());
+            comfortPlayer.GetComponent<DataSync>().Comfort(is_active, RenderSettings.skybox.ToString(), current_level.tag);
             is_active = true;
         } else {
             Debug.Log("Reload");
             ReactivateLevel();
             // Call comfort (reactivate level) (CLIENT SIDE !)
             GameObject comfortPlayer = GameObject.Find("comfortPlayer");
-            comfortPlayer.GetComponent<DataSync>().Comfort(is_active, RenderSettings.skybox.ToString());
+            comfortPlayer.GetComponent<DataSync>().Comfort(is_active, RenderSettings.skybox.ToString(), current_level.tag);
             is_active = false;
         }
     }

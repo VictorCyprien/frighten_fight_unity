@@ -2879,6 +2879,7 @@ MonoBehaviour:
   quit: {fileID: 4508901898560359589}
   comfort_text: {fileID: 7504219153992459167}
   is_active: 0
+  current_level: {fileID: 4645681462671782557}
 --- !u!1 &4645681462671782557
 GameObject:
   m_ObjectHideFlags: 0
