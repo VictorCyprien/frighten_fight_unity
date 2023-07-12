@@ -8,7 +8,11 @@ public class CheckPlatform : MonoBehaviour
 {
     public bool DEBUG;
     public GameObject networkManager;
+    public GameObject waitingScreen;
     private NetworkDiscovery discovery;
+
+    private GameObject waitingClient;
+    private GameObject waitingForServer;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +29,16 @@ public class CheckPlatform : MonoBehaviour
         if (platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.WindowsPlayer)
         {
             Debug.Log("Application is running on Windows");
+            waitingClient = waitingScreen.transform.GetChild(0).gameObject;
+            waitingClient.SetActive(true);
             SetupServer();
         }
         else if (platform == RuntimePlatform.Android)
         {
             Debug.Log("Application is running on Android");
             Screen.orientation = ScreenOrientation.LandscapeLeft;
+            waitingForServer = waitingScreen.transform.GetChild(1).gameObject;
+            waitingForServer.SetActive(true);
             SetupClient();
         }
     }
@@ -58,6 +66,14 @@ public class CheckPlatform : MonoBehaviour
     void Connect(ServerResponse info)
     {
         discovery.StopDiscovery();
+        waitingForServer.SetActive(false);
         NetworkManager.singleton.StartClient(info.uri);
     }
+
+    // Called when a client connect to a server
+    void OnClientConnect(){
+        // WIP
+        return;
+    }
+
 }
