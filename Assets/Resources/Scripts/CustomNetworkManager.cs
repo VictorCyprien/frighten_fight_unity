@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Mirror;
 using UnityEngine;
 
@@ -11,6 +12,36 @@ public class CustomNetworkManager : NetworkManager
     public GameObject vueServeur;
     public GameObject checkPlatform;
     public GameObject waitingCamera;
+    public GameObject ComfortSetting;
+
+    private void RemoveSound(string name){
+        var current_sound = GameObject.Find(name);
+
+        if(current_sound != null){
+            Destroy(current_sound);
+        }
+    }
+
+    private void ResetSkybox(){
+        var skybox = Resources.Load("materials/default") as Material;
+        RenderSettings.skybox = skybox;
+    }
+
+    private void RemovePhobieGameObject(){
+        var current_phobie = Resources
+            .FindObjectsOfTypeAll<GameObject>()
+            .FirstOrDefault(g=>g.CompareTag("Spider"));
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Snake"));
+        }
+
+        if (current_phobie != null){
+            Destroy(current_phobie);
+        }
+    }
 
     public override void OnServerConnect(NetworkConnectionToClient conn){
         Debug.Log("Client connected !");
@@ -26,6 +57,8 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
+        // TODO : Remove vueServeur when select or display current phobie
+        // TODO : Remove current sound + set default skybox + remove current entities
         Debug.Log("Client disconnected !");
         NetworkServer.DestroyPlayerForConnection(conn);
 
@@ -33,8 +66,28 @@ public class CustomNetworkManager : NetworkManager
         waitingClient.SetActive(true);
         waitingScreen.SetActive(true);
 
+        // Remove sound
+        RemoveSound("Music_server");
+
+        // Reset skybox to default
+        ResetSkybox();
+
+        // Remove phobie GameObject
+        RemovePhobieGameObject();
+
+        // Reset "Comfort" setting
+        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
+        quit_button.interactable = true;
+        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
+        comfort_text.text = "Réconforter";
+        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
+
+
+
+        
         // Hide VueServeur (Only for server !)
-        vueServeur.transform.GetChild(0).gameObject.SetActive(false);
+        foreach (Transform child in vueServeur.transform)
+            child.gameObject.SetActive(false);
     }
 
     public override void OnClientDisconnect(){
@@ -43,6 +96,15 @@ public class CustomNetworkManager : NetworkManager
 
         waitingForServer.SetActive(true);
         waitingScreen.SetActive(true);
+
+        // Remove sound
+        RemoveSound("Music_client");
+
+        // Reset skybox to default
+        ResetSkybox();
+
+        //Remove phobie GameObject
+        RemovePhobieGameObject();
 
         // Create a new temporary camera + Restart the discovery
         // This is used to avoid to restart the application in Android
