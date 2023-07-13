@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09965189, g: 0.20040733, b: 0.3224823, a: 1}
+  m_IndirectSpecularColor: {r: 0.10065344, g: 0.2013317, b: 0.3223103, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -266,6 +266,8 @@ MonoBehaviour:
   timeInterpolationGui: 0
   waitingScreen: {fileID: 1187896069}
   vueServeur: {fileID: 520529546}
+  checkPlatform: {fileID: 733696348}
+  waitingCamera: {fileID: 749566344}
 --- !u!114 &281714239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +494,51 @@ MonoBehaviour:
   networkManager: {fileID: 281714233}
   waitingScreen: {fileID: 1187896069}
   vueServeur: {fileID: 520529546}
+  waitingCamera: {fileID: 749566344}
+--- !u!1 &749566344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 749566345}
+  - component: {fileID: 749566346}
+  m_Layer: 0
+  m_Name: WaitingCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &749566345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749566344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &749566346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749566344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b7abce2f0c8de4894ff2e11a169eda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &876476477
 GameObject:
   m_ObjectHideFlags: 0
