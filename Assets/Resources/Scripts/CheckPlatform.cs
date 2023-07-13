@@ -10,8 +10,9 @@ public class CheckPlatform : MonoBehaviour
     public GameObject networkManager;
     public GameObject waitingScreen;
     public GameObject vueServeur;
-    private NetworkDiscovery discovery;
+    public GameObject waitingCamera;
 
+    private NetworkDiscovery discovery;
     private GameObject waitingClient;
     private GameObject waitingForServer;
     private NetworkManager CurrentNetworkManager;
@@ -27,6 +28,9 @@ public class CheckPlatform : MonoBehaviour
             CurrentNetworkManager.StartClient();
             return;
         }
+
+        // Show waitingScreen Canva
+        waitingScreen.SetActive(true);
 
         RuntimePlatform platform = Application.platform;
         discovery = networkManager.GetComponent<NetworkDiscovery>();
@@ -50,9 +54,11 @@ public class CheckPlatform : MonoBehaviour
             Screen.orientation = ScreenOrientation.LandscapeLeft;
 
             // Show waitingForServer message
-            // TODO : Fix message not appear in client phone
             waitingForServer = waitingScreen.transform.GetChild(1).gameObject;
             waitingForServer.SetActive(true);
+
+            // Create temporary camera to see the message
+            waitingCamera.GetComponent<CreateWaitingForServerCamera>().CreateCamera();
             
             SetupClient();
         }
@@ -65,7 +71,7 @@ public class CheckPlatform : MonoBehaviour
         Debug.Log("Server is ok !\nNow listening to connection...");
     }
 
-    void SetupClient()
+    public void SetupClient()
     {
         Debug.Log(discovery);
         discovery.StartDiscovery();
@@ -74,7 +80,7 @@ public class CheckPlatform : MonoBehaviour
     // Called when client found a server
     public void OnDiscoveredServer(ServerResponse info)
     {
-        Debug.Log(info.EndPoint.Address.ToString());
+        Debug.Log($"Server found : {info.EndPoint.Address.ToString()}");
         Connect(info);
     }
 
@@ -82,8 +88,12 @@ public class CheckPlatform : MonoBehaviour
     {
         discovery.StopDiscovery();
 
-        // Hide waitingForServer message 
+        // Hide waitingForServer message + Hide waitingScreen Canva
         waitingForServer.SetActive(false);
+        waitingScreen.SetActive(false);
+
+        // Destroy the temporary camera
+        waitingCamera.GetComponent<CreateWaitingForServerCamera>().DestroyCamera();
         
         CurrentNetworkManager.StartClient(info.uri);
     }
