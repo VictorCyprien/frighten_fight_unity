@@ -27,6 +27,14 @@ public class CustomNetworkManager : NetworkManager
         RenderSettings.skybox = skybox;
     }
 
+    private void ResetComfortSetting(){
+        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
+        quit_button.interactable = true;
+        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
+        comfort_text.text = "Réconforter";
+        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
+    }
+
     private void RemovePhobieGameObject(){
         var current_phobie = Resources
             .FindObjectsOfTypeAll<GameObject>()
@@ -74,14 +82,7 @@ public class CustomNetworkManager : NetworkManager
         RemovePhobieGameObject();
 
         // Reset "Comfort" setting
-        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
-        quit_button.interactable = true;
-        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
-        comfort_text.text = "Réconforter";
-        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
-
-
-
+        ResetComfortSetting();
         
         // Hide VueServeur (Only for server !)
         foreach (Transform child in vueServeur.transform)
