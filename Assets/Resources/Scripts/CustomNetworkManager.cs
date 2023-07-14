@@ -57,8 +57,6 @@ public class CustomNetworkManager : NetworkManager
 
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
-        // TODO : Remove vueServeur when select or display current phobie
-        // TODO : Remove current sound + set default skybox + remove current entities
         Debug.Log("Client disconnected !");
         NetworkServer.DestroyPlayerForConnection(conn);
 
