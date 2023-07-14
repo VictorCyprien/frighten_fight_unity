@@ -12,8 +12,8 @@ public class LevelDifficulty : MonoBehaviour
         switch (level_type)
         {   
             case "arachnophobie":
-                sound_name = "jungle_sound";
-                skybox_name = "jungle_view";
+                sound_name = "arachnophobia_sound";
+                skybox_name = "arachnophobia_view";
 
                 if(level_difficulty == 6){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_6") as GameObject;
@@ -50,7 +50,7 @@ public class LevelDifficulty : MonoBehaviour
                 break;
 
             case "ophiophobie":
-                sound_name = "ophiophobie_sound";
+                sound_name = "ophiophobia_sound";
                 skybox_name = "ophiophobie_view";
 
                 if(level_difficulty == 6){
