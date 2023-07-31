@@ -21,6 +21,35 @@ public class LevelDifficulty : MonoBehaviour
                 sound_name = "arachnophobia_sound";
                 skybox_name = "arachnophobia_view";
 
+                if(level_difficulty == 5){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_5") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_server";
+                    current_phobie.transform.position = spiderPosition;
+
+
+                    /*
+                    // Chargez la texture depuis le dossier "Materials"
+                    Texture spiderTexture = Resources.Load("Materials/your_spider_texture") as Texture;
+
+                    // Récupérez le composant Renderer du GameObject
+                    Renderer spiderRenderer = current_phobie.GetComponent<Renderer>();
+
+                    // Assurez-vous que le composant Renderer existe et que la texture est chargée correctement
+                    if (spiderRenderer != null && spiderTexture != null)
+                    {
+                        // Appliquez la texture sur le GameObject
+                        spiderRenderer.material.mainTexture = spiderTexture;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("La texture ou le Renderer n'ont pas été trouvés.");
+                    }
+                    */
+                }
+
                 if(level_difficulty == 6){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_6") as GameObject;
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
