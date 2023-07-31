@@ -61,7 +61,7 @@ public class LevelDifficulty : MonoBehaviour
 
                 if (level_difficulty == 3)
                 {
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/crate_snake/snake_level_3") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
@@ -71,7 +71,7 @@ public class LevelDifficulty : MonoBehaviour
 
                 if (level_difficulty == 4)
                 {
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_4") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/fake_snake/snake_level_4") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";

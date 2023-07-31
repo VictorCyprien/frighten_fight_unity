@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41569f1eb4209874497fffc479e4de5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG: 0
+  DEBUG: 1
   networkManager: {fileID: 281714233}
   waitingScreen: {fileID: 1187896069}
   vueServeur: {fileID: 520529546}
