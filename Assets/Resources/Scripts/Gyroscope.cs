@@ -15,13 +15,9 @@ public class Gyroscope : MonoBehaviour
         gyroEnabled = EnableGyro();
 
         // Ajustement de la rotation initiale pour la vue paysage
-        initialRotation = Quaternion.Euler(-90f, 0f, 0f);
+        initialRotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
-    /// <summary>
-    /// Check if the system support the Gyroscope and apply some settings
-    /// </summary>
-    /// <returns>A Boolean value who indicate if the system support the gyroscope</returns>
     private bool EnableGyro()
     {
         if (SystemInfo.supportsGyroscope)
@@ -45,9 +41,16 @@ public class Gyroscope : MonoBehaviour
     {
         if (gyroEnabled)
         {
-            Quaternion gyroAttitude = gyro.attitude;
-            Quaternion targetRotation = initialRotation * gyroAttitude;
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
+            Quaternion gyroQuaternion = GyroToUnity(Input.gyro.attitude);
+            Quaternion calculatedRotation = initialRotation * gyroQuaternion;
+            transform.rotation = calculatedRotation;
         }
+
+    }
+
+    // Fix gyroscope orientation
+    private static Quaternion GyroToUnity(Quaternion q)
+    {
+        return new Quaternion(q.x, q.y, -q.z, -q.w);
     }
 }
