@@ -19,6 +19,8 @@ public class CheckValue : MonoBehaviour
     /// </summary>
     /// <param name="level_difficulty">Difficulty of the level</param>
     /// <returns>A string with the description of the level</returns>
+    
+    // TODO : Add new description for acrophobie
     string build_new_description(int level_difficulty){
         string msg = "";
         
