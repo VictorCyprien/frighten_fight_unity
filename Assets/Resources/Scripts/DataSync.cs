@@ -78,7 +78,38 @@ public class DataSync : NetworkBehaviour
                 break;
 
             case "ophiophobie":
-                if(level_difficulty == 6){
+
+                if (level_difficulty == 3)
+                {
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
+                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_client";
+                    current_phobie.transform.position = snakePosition;
+                }
+
+                if (level_difficulty == 4)
+                {
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_4") as GameObject;
+                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_client";
+                    current_phobie.transform.position = snakePosition;
+                }
+
+                if (level_difficulty == 5)
+                {
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_5") as GameObject;
+                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.name = "Snake_client";
+                    current_phobie.transform.position = snakePosition;
+                }
+
+                if (level_difficulty == 6){
                     var snakePrefab = Resources.Load("prefabs/snake/snake_level_6") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
