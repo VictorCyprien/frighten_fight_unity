@@ -24,6 +24,9 @@ public class LevelStart : MonoBehaviour
 		btn.onClick.AddListener(LoadLevel);
     }
 
+    /// <summary>
+    /// Load the level selected for server side
+    /// </summary>
     void LoadLevel(){
         // round to int to catch floating point problems.
         var level_difficulty = Mathf.RoundToInt(difficulty.value * (maxValue - minValue) + minValue);

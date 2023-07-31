@@ -64,6 +64,9 @@ public class CheckPlatform : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Start a new server
+    /// </summary>
     void SetupServer()
     {
         CurrentNetworkManager.StartServer();
@@ -71,19 +74,29 @@ public class CheckPlatform : MonoBehaviour
         Debug.Log("Server is ok !\nNow listening to connection...");
     }
 
+    /// <summary>
+    /// Start the discovery of server for client
+    /// </summary>
     public void SetupClient()
     {
         Debug.Log(discovery);
         discovery.StartDiscovery();
     }
 
-    // Called when client found a server
+    /// <summary>
+    /// Called when client found a server
+    /// </summary>
+    /// <param name="info">The information about the server found</param>
     public void OnDiscoveredServer(ServerResponse info)
     {
         Debug.Log($"Server found : {info.EndPoint.Address.ToString()}");
         Connect(info);
     }
 
+    /// <summary>
+    /// Connect the client to the server
+    /// </summary>
+    /// <param name="info">The information about the server found</param>
     void Connect(ServerResponse info)
     {
         discovery.StopDiscovery();

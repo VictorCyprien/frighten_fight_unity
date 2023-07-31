@@ -14,6 +14,9 @@ public class LevelStop : MonoBehaviour
 		btn.onClick.AddListener(StopLevel);
     }
 
+    /// <summary>
+    /// Stop the current level for server side
+    /// </summary>
     void StopLevel(){
         // Get music GameObject
         var music = GameObject.Find("Music_server");
