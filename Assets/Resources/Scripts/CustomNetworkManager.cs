@@ -70,7 +70,8 @@ public class CustomNetworkManager : NetworkManager
     /// <summary>
     /// Called when a client connect to the server
     /// </summary>
-    public override void OnServerConnect(){
+    /// <param name="conn">The current connection between the client and the server</param>
+    public override void OnServerConnect(NetworkConnectionToClient conn){
         Debug.Log("Client connected !");
 
         // We get 'Waiting' canva and hide his object (child + parent)
