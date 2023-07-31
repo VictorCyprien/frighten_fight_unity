@@ -61,7 +61,7 @@ public class LevelDifficulty : MonoBehaviour
 
                 if (level_difficulty == 3)
                 {
-                    var snakePrefab = Resources.Load("prefabs/snake/crate_snake/snake_level_3") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
@@ -81,7 +81,7 @@ public class LevelDifficulty : MonoBehaviour
 
                 if (level_difficulty == 5)
                 {
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_5") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/crate_snake/snake_level_5") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
@@ -99,7 +99,7 @@ public class LevelDifficulty : MonoBehaviour
                 }
 
                 if(level_difficulty == 7){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_7") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_7") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
@@ -108,7 +108,7 @@ public class LevelDifficulty : MonoBehaviour
                 }
 
                 if(level_difficulty == 8){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_8") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_7") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
