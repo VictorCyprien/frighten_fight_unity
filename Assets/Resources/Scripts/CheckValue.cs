@@ -14,6 +14,11 @@ public class CheckValue : MonoBehaviour
     public int minValue = 1;
     public int maxValue = 8;
 
+    /// <summary>
+    /// Build the message description of the level
+    /// </summary>
+    /// <param name="level_difficulty">Difficulty of the level</param>
+    /// <returns>A string with the description of the level</returns>
     string build_new_description(int level_difficulty){
         string msg = "";
         
@@ -55,6 +60,10 @@ public class CheckValue : MonoBehaviour
         return msg;
     }
 
+    /// <summary>
+    /// Check the current level difficulty selected
+    /// </summary>
+    /// <param name="value">The value of the ScrollBar</param>
     private void OnScrollbarValueChanged(float value)
     {
         int currentStep = Mathf.RoundToInt(value * (maxValue - minValue) + minValue);

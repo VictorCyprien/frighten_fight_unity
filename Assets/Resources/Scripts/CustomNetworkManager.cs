@@ -4,8 +4,11 @@ using System.Linq;
 using Mirror;
 using UnityEngine;
 
-// This is a Custom class for NetworkManager
-// It is used for override a current function in the abstract NetworkManager Class when a client connect to a server
+
+/// <summary>
+/// This is a Custom class for NetworkManager
+/// It is used for override a current function in the abstract NetworkManager Class when a client connect to a server
+/// </summary>
 public class CustomNetworkManager : NetworkManager
 {
     public GameObject waitingScreen;
@@ -14,6 +17,10 @@ public class CustomNetworkManager : NetworkManager
     public GameObject waitingCamera;
     public GameObject ComfortSetting;
 
+    /// <summary>
+    /// Remove the sound GameObject
+    /// </summary>
+    /// <param name="name">The name of the GameObject</param>
     private void RemoveSound(string name){
         var current_sound = GameObject.Find(name);
 
@@ -22,11 +29,17 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
+    /// <summary>
+    /// Reset the skybox at default value
+    /// </summary>
     private void ResetSkybox(){
         var skybox = Resources.Load("materials/default") as Material;
         RenderSettings.skybox = skybox;
     }
 
+    /// <summary>
+    /// Reset the setting of comfort functionnality
+    /// </summary>
     private void ResetComfortSetting(){
         var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
         quit_button.interactable = true;
@@ -35,6 +48,9 @@ public class CustomNetworkManager : NetworkManager
         ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
     }
 
+    /// <summary>
+    /// Remove GameObject of Snake and Spider
+    /// </summary>
     private void RemovePhobieGameObject(){
         var current_phobie = Resources
             .FindObjectsOfTypeAll<GameObject>()
@@ -51,6 +67,10 @@ public class CustomNetworkManager : NetworkManager
         }
     }
 
+    /// <summary>
+    /// Called when a client connect to the server
+    /// </summary>
+    /// <param name="conn">The current connection between the client and the server</param>
     public override void OnServerConnect(NetworkConnectionToClient conn){
         Debug.Log("Client connected !");
 
@@ -63,6 +83,10 @@ public class CustomNetworkManager : NetworkManager
         vueServeur.transform.GetChild(0).gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// Called when a client is disconnected for the server
+    /// </summary>
+    /// <param name="conn">The current connection between the client and the server</param>
     public override void OnServerDisconnect(NetworkConnectionToClient conn)
     {
         Debug.Log("Client disconnected !");
@@ -89,6 +113,9 @@ public class CustomNetworkManager : NetworkManager
             child.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Called when a client lost the connection to a server
+    /// </summary>
     public override void OnClientDisconnect(){
         // Get and Show the research for server canva
         var waitingForServer = waitingScreen.transform.GetChild(1).gameObject;

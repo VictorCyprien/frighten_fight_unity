@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class LevelDifficulty : MonoBehaviour
 {
+    /// <summary>
+    /// Build the name of the resource we want to load and create GameObject when needed
+    /// </summary>
+    /// <param name="level_type"></param>
+    /// <param name="level_difficulty"></param>
+    /// <returns>A string with the name of the skybox and a string with the name of the sound </returns>
     public (string, string) ChoiceLevelDifficulty(string level_type, int level_difficulty){
         string skybox_name = "";
         string sound_name = "";

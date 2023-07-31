@@ -23,6 +23,9 @@ public class ComfortPlayer : MonoBehaviour
 		comfort.onClick.AddListener(Comfort);
     }
 
+    /// <summary>
+    /// Desactivate the level to comfort the player
+    /// </summary>
     public void DeactivateLevel(){
         // Get music GameObject
         var music = GameObject.Find("Music_server");
@@ -75,6 +78,9 @@ public class ComfortPlayer : MonoBehaviour
         comfort_text.text = "Reprendre";
     } 
 
+    /// <summary>
+    /// Reactivate the level when the player is comforted
+    /// </summary>
     public void ReactivateLevel(){
         // Get music GameObject
         var music = GameObject.Find("Music_server");
@@ -97,7 +103,9 @@ public class ComfortPlayer : MonoBehaviour
         comfort_text.text = "Réconforter";
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Determines whether to pause or resume the level
+    /// </summary>
     public void Comfort(){
         if (!is_active){
             Debug.Log("Comfort");

@@ -8,6 +8,11 @@ using System;
 public class DataSync : NetworkBehaviour
 {
 
+    /// <summary>
+    /// Update the sound and skybox on client side
+    /// </summary>
+    /// <param name="sound_name">The name of the sound</param>
+    /// <param name="skybox_name">The name of the skybox</param>
     [ClientRpc]
     public void UpdateSoundAndSkybox(String sound_name, String skybox_name)
     {
@@ -26,7 +31,11 @@ public class DataSync : NetworkBehaviour
         RenderSettings.skybox = skybox;
     }
 
-
+    /// <summary>
+    /// Add Spider or Snake GameObject for client side
+    /// </summary>
+    /// <param name="levelChoice">The current phobie selected</param>
+    /// <param name="level_difficulty">The current difficulty of the level</param>
     [ClientRpc]
     public void UpdateGameObject(String levelChoice, int level_difficulty)
     {
@@ -100,6 +109,9 @@ public class DataSync : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Remove current Spider or Snake GameObject for client side
+    /// </summary>
     [ClientRpc]
     public void RemoveGameObject(){
         var current_phobie = Resources
@@ -117,6 +129,9 @@ public class DataSync : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Remove sound and reset skybox to default for client side
+    /// </summary>
     [ClientRpc]
     public void DeleteSoundAndSkyBox(){
         // Get music GameObject
@@ -136,6 +151,10 @@ public class DataSync : NetworkBehaviour
         RenderSettings.skybox = skybox;
     }
 
+    /// <summary>
+    /// Deactivate the level to comfort the player for client side
+    /// </summary>
+    /// <param name="current_level">The current phobie selected</param>
     [ClientRpc]
     public void DeactivateLevel(String current_level){
         // Get music GameObject
@@ -188,6 +207,10 @@ public class DataSync : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Reactivate the level for client side
+    /// </summary>
+    /// <param name="previous_skybox">The previous skybox used for the current level</param>
     [ClientRpc]
     public void ReactivateLevel(String previous_skybox){
         // Get music GameObject
@@ -217,28 +240,50 @@ public class DataSync : NetworkBehaviour
         }
     }
 
+    /// <summary>
+    /// Liaison function that calls the main function to set the sound and the skybox for client side
+    /// </summary>
+    /// <param name="sound_name">The name of the sound</param>
+    /// <param name="skybox_name">The name of the skybox</param>
     public void UpdateData(String sound_name, String skybox_name)
     {
         Debug.Log("UpdateSoundAndSkybox from client...");
         UpdateSoundAndSkybox(sound_name, skybox_name);
     }
 
+    /// <summary>
+    /// Liaison function that calls the main function to set Snake or Spider GameObject for client side
+    /// </summary>
+    /// <param name="levelChoice">The current phobie selected</param>
+    /// <param name="level_difficulty">The current difficulty of the level</param>
     public void UpdatePhobie(String levelChoice, int level_difficulty)
     {
         Debug.Log("UpdateGameObject from client...");
         UpdateGameObject(levelChoice, level_difficulty);
     }
 
+    /// <summary>
+    /// Liaison function that calls the main function to remove the sound and the skybox for client side
+    /// </summary>
     public void DeleteData(){
         Debug.Log("DeleteSoundAndSkyBox from client...");
         DeleteSoundAndSkyBox();
     }
 
+    /// <summary>
+    /// Liaison function that calls the main function to remove the Snake or Snider GameObject for client side
+    /// </summary>
     public void DeletePhobie(){
         Debug.Log("DeleteGameObject from client...");
         RemoveGameObject();
     }
 
+    /// <summary>
+    /// Liaison function that calls the main function to deactivate or reactivate the level for client side
+    /// </summary>
+    /// <param name="is_active"></param>
+    /// <param name="previous_skybox"></param>
+    /// <param name="current_level"></param>
     public void Comfort(bool is_active, String previous_skybox, String current_level){
         if (!is_active){
             Debug.Log("Comfort from client...");

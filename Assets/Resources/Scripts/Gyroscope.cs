@@ -18,6 +18,10 @@ public class Gyroscope : MonoBehaviour
         initialRotation = Quaternion.Euler(-90f, 0f, 0f);
     }
 
+    /// <summary>
+    /// Check if the system support the Gyroscope and apply some settings
+    /// </summary>
+    /// <returns>A Boolean value who indicate if the system support the gyroscope</returns>
     private bool EnableGyro()
     {
         if (SystemInfo.supportsGyroscope)
