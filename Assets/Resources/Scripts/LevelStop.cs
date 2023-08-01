@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class LevelStop : MonoBehaviour
 {
     public Button stopLevel;
+    public GameObject ComfortSetting;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +50,13 @@ public class LevelStop : MonoBehaviour
         if (current_phobie != null){
             Destroy(current_phobie);
         }
+
+        // Reset comfort settings
+        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
+        quit_button.interactable = true;
+        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
+        comfort_text.text = "Réconforter";
+        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
 
         // Update Sound and Skybox (CLIENT SIDE !)
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
