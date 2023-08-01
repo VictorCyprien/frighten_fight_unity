@@ -241,8 +241,10 @@ public class DataSync : MonoBehaviour
     }
 
     /// <summary>
-    /// Research the current hidden GameObject phobie for the client side
-    /// WARNING : This method is used to avoid passing an GameObject by function parameters when it's not possible
+    /// Research the current hidden GameObject phobie
+    /// WARNING : When a GameObject is hidden and his not accessible to through the script, it return a null value when you try to reach it
+    /// So we use this code to found the current phobie with the tag associated
+    /// This method is used to avoid passing an GameObject by function parameters when it's not possible
     /// This is due to the serialization of GameObject with mirror which is incompatible.
     /// This method is not recommanded and need to change in the future
     /// </summary>
