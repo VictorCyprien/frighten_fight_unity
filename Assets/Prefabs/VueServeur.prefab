@@ -2422,7 +2422,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1830682790394834508}
+      - m_Target: {fileID: 1830682788901826094}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -2447,6 +2447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopLevel: {fileID: 4508901898560359589}
+  ComfortSetting: {fileID: 4449120265027574894}
 --- !u!1 &3252048526885431331
 GameObject:
   m_ObjectHideFlags: 0
