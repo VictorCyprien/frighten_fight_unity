@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.09953898, g: 0.20037188, b: 0.3223921, a: 1}
+  m_IndirectSpecularColor: {r: 0.10065344, g: 0.2013317, b: 0.3223103, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41569f1eb4209874497fffc479e4de5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DEBUG: 1
+  DEBUG: 0
   networkManager: {fileID: 281714233}
   waitingScreen: {fileID: 1187896069}
   vueServeur: {fileID: 520529546}
@@ -765,6 +765,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1859483142 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1830682788901826094, guid: 50c32ca4e1a62404795a949e72cf6cce,
+    type: 3}
+  m_PrefabInstance: {fileID: 1830682790255112666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2098770113
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1163,6 +1169,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Comfort
       objectReference: {fileID: 0}
+    - target: {fileID: 4508901898560359589, guid: 50c32ca4e1a62404795a949e72cf6cce,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1859483142}
+    - target: {fileID: 4508901898560359589, guid: 50c32ca4e1a62404795a949e72cf6cce,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 4565072036852516958, guid: 50c32ca4e1a62404795a949e72cf6cce,
         type: 3}
       propertyPath: comfort
@@ -1173,6 +1189,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
+    - target: {fileID: 5624406630776720049, guid: 50c32ca4e1a62404795a949e72cf6cce,
+        type: 3}
+      propertyPath: ComfortSetting
+      value: 
+      objectReference: {fileID: 1830682790255112667}
     - target: {fileID: 8082793058524627619, guid: 50c32ca4e1a62404795a949e72cf6cce,
         type: 3}
       propertyPath: sceneId

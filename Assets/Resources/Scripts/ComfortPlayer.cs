@@ -74,7 +74,6 @@ public class ComfortPlayer : MonoBehaviour
         }
 
         // Manage quit/comfort button
-        quit.interactable = false;
         comfort_text.text = "Reprendre";
     } 
 
@@ -99,7 +98,6 @@ public class ComfortPlayer : MonoBehaviour
         }
 
         // Manage quit/comfort button
-        quit.interactable = true;
         comfort_text.text = "Réconforter";
     }
 
