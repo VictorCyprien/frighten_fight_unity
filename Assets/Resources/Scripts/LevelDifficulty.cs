@@ -16,7 +16,6 @@ public class LevelDifficulty : MonoBehaviour
         string skybox_name = "";
         string sound_name = "";
         DataSync dataSync = new DataSync();
-        GameObject current_phobie = null;
         
         switch (level_type)
         {   

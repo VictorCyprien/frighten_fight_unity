@@ -39,7 +39,6 @@ public class ClientSync : NetworkBehaviour
     {
         Debug.Log("CLIENT !");
         // Add Gameobject to client side
-        GameObject current_phobie = null;
         switch (levelChoice)
         {   
             case "arachnophobie":
@@ -86,6 +85,7 @@ public class ClientSync : NetworkBehaviour
         dataSync.PauseSound("Music_client");
 
         // Apply default skybox in function of current phobie
+        // TODO : Factorise this code
         switch(current_level){
             case "arachnophobie":
                 Debug.Log("Comfort arachnophobie");
