@@ -175,7 +175,6 @@ public class DataSync : MonoBehaviour
 
                 break;
 
-            // TODO : Add acrophobie gameobject
             case "acrophobie":
                 if (level_difficulty == 4)
                 {
@@ -266,7 +265,7 @@ public class DataSync : MonoBehaviour
     /// Hide the phobie gameobject of the server
     /// </summary>
     /// <param name="current_phobie">The current phobie used</param>
-    /// <returns></returns>
+    /// <returns>A GameObject with the current phobie</returns>
     public GameObject HideServerGameObject(GameObject current_phobie){
         current_phobie = GameObject.FindWithTag("Spider");
 
@@ -289,7 +288,7 @@ public class DataSync : MonoBehaviour
     /// This is due to the serialization of GameObject with mirror which is incompatible.
     /// This method is not recommanded and need to change in the future
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A GameObject with the current phobie</returns>
     public GameObject GetCurrentPhobie(){
         var current_phobie = Resources
             .FindObjectsOfTypeAll<GameObject>()
@@ -300,7 +299,12 @@ public class DataSync : MonoBehaviour
                 .FindObjectsOfTypeAll<GameObject>()
                 .FirstOrDefault(g=>g.CompareTag("Snake"));
         }
-        // TODO : Add acrophobie to phobie
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Balloon"));
+        }
 
         return current_phobie;
     }

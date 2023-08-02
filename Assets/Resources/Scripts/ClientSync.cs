@@ -46,7 +46,7 @@ public class ClientSync : NetworkBehaviour
                 break;
 
             case "acrophobie":
-                // TODO : Add acrophobie gameobject
+                dataSync.CreateGameObject(levelChoice, level_difficulty, "Balloon_client");
                 break;
 
             case "ophiophobie":
