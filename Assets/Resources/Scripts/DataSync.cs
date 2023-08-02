@@ -92,11 +92,6 @@ public class DataSync : MonoBehaviour
                 Debug.Log("Comfort ophiophobie");
                 this.UpdateSkybox("comfort_ophiophobie");
                 break;
-
-            default:
-                Debug.Log("This should not arrive...");
-                this.UpdateSkybox("materials/default");
-                break;
         }
     }
 
