@@ -76,6 +76,30 @@ public class DataSync : MonoBehaviour
         RenderSettings.skybox = skybox;
     }
 
+    public void Comfort(string current_level){
+        switch(current_level){
+            case "arachnophobie":
+                Debug.Log("Comfort arachnophobie");
+                dataSync.UpdateSkybox("comfort_arachnophobie");
+                break;
+
+            case "acrophobie":
+                Debug.Log("Comfort acrophobie");
+                dataSync.UpdateSkybox("comfort_acrophobie");
+                break;
+
+            case "ophiophobie":
+                Debug.Log("Comfort ophiophobie");
+                dataSync.UpdateSkybox("comfort_ophiophobie");
+                break;
+
+            default:
+                Debug.Log("This should not arrive...");
+                dataSync.UpdateSkybox("materials/default");
+                break;
+        }
+    }
+
     /// <summary>
     /// Reset the setting of comfort functionnality
     /// </summary>
