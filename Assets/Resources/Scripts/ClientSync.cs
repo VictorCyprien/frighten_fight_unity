@@ -46,7 +46,7 @@ public class ClientSync : NetworkBehaviour
                 break;
 
             case "acrophobie":
-
+                // TODO : Add acrophobie gameobject
                 break;
 
             case "ophiophobie":
@@ -80,33 +80,12 @@ public class ClientSync : NetworkBehaviour
     /// </summary>
     /// <param name="current_level">The current phobie selected</param>
     [ClientRpc]
-    public void DeactivateLevel(String current_level){
+    public void DeactivateLevel(string current_level){
         // Pause the current sound
         dataSync.PauseSound("Music_client");
 
-        // Apply default skybox in function of current phobie
-        // TODO : Factorise this code
-        switch(current_level){
-            case "arachnophobie":
-                Debug.Log("Comfort arachnophobie");
-                dataSync.UpdateSkybox("comfort_arachnophobie");
-                break;
-
-            case "acrophobie":
-                Debug.Log("Comfort acrophobie");
-                dataSync.UpdateSkybox("comfort_acrophobie");
-                break;
-
-            case "ophiophobie":
-                Debug.Log("Comfort ophiophobie");
-                dataSync.UpdateSkybox("comfort_ophiophobie");
-                break;
-
-            default:
-                Debug.Log("This should not arrive...");
-                dataSync.UpdateSkybox("materials/default");
-                break;
-        }
+        // Apply skybox for comfort player in function of current phobie
+        dataSync.Comfort(current_level)
 
         //Hide phobie GameObject
         dataSync.HideClientGameObject();

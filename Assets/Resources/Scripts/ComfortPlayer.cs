@@ -36,30 +36,11 @@ public class ComfortPlayer : MonoBehaviour
 
         // Apply default skybox in function of current phobie
         previous_skybox = RenderSettings.skybox;
-        switch(current_level.tag){
-            case "arachnophobie":
-                Debug.Log("Comfort arachnophobie");
-                dataSync.UpdateSkybox("comfort_arachnophobie");
-                break;
 
-            case "acrophobie":
-                Debug.Log("Comfort acrophobie");
-                dataSync.UpdateSkybox("comfort_acrophobie");
-                break;
-
-            case "ophiophobie":
-                Debug.Log("Comfort ophiophobie");
-                dataSync.UpdateSkybox("comfort_ophiophobie");
-                break;
-
-            default:
-                Debug.Log("This should not arrive...");
-                dataSync.UpdateSkybox("materials/default");
-                break;
-        }
+        // Apply skybox for comfort player in function of current phobie
+        dataSync.Comfort(current_level.tag);
 
         //Hide phobie GameObject
-        // TODO : Add acrophobie gameobject for later
         current_phobie = dataSync.HideServerGameObject(current_phobie);
 
         // Manage quit/comfort button
