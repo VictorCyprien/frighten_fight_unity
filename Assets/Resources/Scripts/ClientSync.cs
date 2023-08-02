@@ -85,7 +85,7 @@ public class ClientSync : NetworkBehaviour
         dataSync.PauseSound("Music_client");
 
         // Apply skybox for comfort player in function of current phobie
-        dataSync.Comfort(current_level)
+        dataSync.Comfort(current_level);
 
         //Hide phobie GameObject
         dataSync.HideClientGameObject();
