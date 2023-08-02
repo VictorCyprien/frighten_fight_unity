@@ -28,6 +28,29 @@ public class LevelDifficulty : MonoBehaviour
             case "acrophobie":
                 sound_name = "acrophobie_sound";
                 skybox_name = "acrophobie_view";
+
+                if (level_difficulty == 4)
+                {
+                    var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
+                    Vector3 balloonPosition = new Vector3(15, -20, 0);
+                    current_phobie = Instantiate(balloonPrefab);
+                    current_phobie.tag = "Balloon";
+                    current_phobie.name = "Balloon_server";
+                    current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
+                }
+
+                if (level_difficulty == 8)
+                {
+                    var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
+                    Vector3 balloonPosition = new Vector3(15, -20, 0);
+                    current_phobie = Instantiate(balloonPrefab);
+                    current_phobie.tag = "Balloon";
+                    current_phobie.name = "Balloon_server";
+                    current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
+                }
+
                 break;
 
             case "ophiophobie":
