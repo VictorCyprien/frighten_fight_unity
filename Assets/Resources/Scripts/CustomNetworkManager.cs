@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Mirror;
 using UnityEngine;
 
+using static DataSync;
 
 /// <summary>
 /// This is a Custom class for NetworkManager
@@ -17,55 +17,11 @@ public class CustomNetworkManager : NetworkManager
     public GameObject waitingCamera;
     public GameObject ComfortSetting;
 
-    /// <summary>
-    /// Remove the sound GameObject
-    /// </summary>
-    /// <param name="name">The name of the GameObject</param>
-    private void RemoveSound(string name){
-        var current_sound = GameObject.Find(name);
+    private DataSync dataSync;
 
-        if(current_sound != null){
-            Destroy(current_sound);
-        }
-    }
-
-    /// <summary>
-    /// Reset the skybox at default value
-    /// </summary>
-    private void ResetSkybox(){
-        var skybox = Resources.Load("materials/default") as Material;
-        RenderSettings.skybox = skybox;
-    }
-
-    /// <summary>
-    /// Reset the setting of comfort functionnality
-    /// </summary>
-    private void ResetComfortSetting(){
-        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
-        quit_button.interactable = true;
-        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
-        comfort_text.text = "Réconforter";
-        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
-    }
-
-    /// <summary>
-    /// Remove GameObject of Snake and Spider
-    /// </summary>
-    private void RemovePhobieGameObject(){
-        var current_phobie = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Spider"));
-
-        if (current_phobie == null) {
-            current_phobie = Resources
-                .FindObjectsOfTypeAll<GameObject>()
-                .FirstOrDefault(g=>g.CompareTag("Snake"));
-        }
-
-        if (current_phobie != null){
-            Destroy(current_phobie);
-        }
-    }
+    new void Start(){
+        dataSync = new DataSync();
+    } 
 
     /// <summary>
     /// Called when a client connect to the server
@@ -97,16 +53,16 @@ public class CustomNetworkManager : NetworkManager
         waitingScreen.SetActive(true);
 
         // Remove sound
-        RemoveSound("Music_server");
+        dataSync.RemoveSound("Music_server");
 
         // Reset skybox to default
-        ResetSkybox();
+        dataSync.ResetSkybox();
 
         // Remove phobie GameObject
-        RemovePhobieGameObject();
+        dataSync.RemovePhobieGameObject();
 
         // Reset "Comfort" setting
-        ResetComfortSetting();
+        dataSync.ResetComfortSetting(ComfortSetting);
         
         // Hide VueServeur (Only for server !)
         foreach (Transform child in vueServeur.transform)
@@ -124,13 +80,13 @@ public class CustomNetworkManager : NetworkManager
         waitingScreen.SetActive(true);
 
         // Remove sound
-        RemoveSound("Music_client");
+        dataSync.RemoveSound("Music_client");
 
         // Reset skybox to default
-        ResetSkybox();
+        dataSync.ResetSkybox();
 
         //Remove phobie GameObject
-        RemovePhobieGameObject();
+        dataSync.RemovePhobieGameObject();
 
         // Create a new temporary camera + Restart the discovery
         // This is used to avoid to restart the application in Android

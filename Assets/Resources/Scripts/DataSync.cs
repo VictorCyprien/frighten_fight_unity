@@ -2,55 +2,156 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Mirror;
-using System;
+using UnityEngine.UI;
 
-public class DataSync : NetworkBehaviour
+/// <summary>
+/// Basic class to call methods for both server and client side
+/// This is very useful to avoid to repeat some code with very minor changes
+/// </summary>
+public class DataSync : MonoBehaviour
 {
-
     /// <summary>
-    /// Update the sound and skybox on client side
+    /// Create a GameObject with AudioSource Component
     /// </summary>
-    /// <param name="sound_name">The name of the sound</param>
-    /// <param name="skybox_name">The name of the skybox</param>
-    [ClientRpc]
-    public void UpdateSoundAndSkybox(String sound_name, String skybox_name)
-    {
-        Debug.Log("CLIENT !");
-
-        // Add music to play (client side)
+    /// <param name="sound_name">The name of the sound in the ressources folder</param>
+    /// <param name="object_name">The name of the object</param>
+    public void CreateSound(string sound_name, string object_name){
+        // Add music to play
         AudioClip sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
-        GameObject music = new GameObject("Music_client");
+        GameObject music = new GameObject(object_name);
         music.AddComponent<AudioSource>();
         music.GetComponent<AudioSource>().clip = sound;
         music.GetComponent<AudioSource>().loop = true;
         music.GetComponent<AudioSource>().Play();
+    }
 
-        // Update Skybox (client side)
+    /// <summary>
+    /// Pause the sound of a GameObject with AudioSource Component
+    /// </summary>
+    /// <param name="sound_name">The name of the GameObject</param>
+    public void PauseSound(string sound_name){
+        var music = GameObject.Find(sound_name);
+        var sound = music.GetComponent<AudioSource>();
+        sound.Pause();
+    }
+
+    /// <summary>
+    /// Resume the sound of a GameObject with AudioSource Component
+    /// </summary>
+    /// <param name="sound_name">The name of the GameObject</param>
+    public void ResumeSound(string sound_name){
+        var music = GameObject.Find(sound_name);
+        var sound = music.GetComponent<AudioSource>();
+        sound.UnPause();
+    }
+
+    /// <summary>
+    /// Update the skybox view
+    /// </summary>
+    /// <param name="skybox_name">The name of the skybox in the ressources folder</param>
+    public void UpdateSkybox(string skybox_name){
+        // Update Skybox
         Material skybox = Resources.Load($"materials/{skybox_name}") as Material;
         RenderSettings.skybox = skybox;
     }
 
+
     /// <summary>
-    /// Add Spider or Snake GameObject for client side
+    /// Remove the sound GameObject
     /// </summary>
-    /// <param name="levelChoice">The current phobie selected</param>
-    /// <param name="level_difficulty">The current difficulty of the level</param>
-    [ClientRpc]
-    public void UpdateGameObject(String levelChoice, int level_difficulty)
-    {
-        Debug.Log("CLIENT !");
-        // Add Gameobject to client side
+    /// <param name="name">The name of the GameObject</param>
+    public void RemoveSound(string name){
+        var current_sound = GameObject.Find(name);
+
+        if(current_sound != null){
+            Destroy(current_sound);
+        }
+    }
+
+    /// <summary>
+    /// Reset the skybox at default value
+    /// </summary>
+    public void ResetSkybox(){
+        var skybox = Resources.Load("materials/default") as Material;
+        RenderSettings.skybox = skybox;
+    }
+
+    public void Comfort(string current_level){
+        switch(current_level){
+            case "arachnophobie":
+                Debug.Log("Comfort arachnophobie");
+                this.UpdateSkybox("comfort_arachnophobie");
+                break;
+
+            case "acrophobie":
+                Debug.Log("Comfort acrophobie");
+                this.UpdateSkybox("comfort_acrophobie");
+                break;
+
+            case "ophiophobie":
+                Debug.Log("Comfort ophiophobie");
+                this.UpdateSkybox("comfort_ophiophobie");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Reset the setting of comfort functionnality
+    /// </summary>
+    public void ResetComfortSetting(GameObject ComfortSetting){
+        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
+        quit_button.interactable = true;
+        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
+        comfort_text.text = "Réconforter";
+        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
+    }
+
+    /// <summary>
+    /// Create a phobie GameObject
+    /// </summary>
+    /// <param name="level_type">The type of the phobie</param>
+    /// <param name="level_difficulty">The difficulty of the level</param>
+    /// <param name="phobie_name">The name of the phobie</param>
+    public void CreateGameObject(string level_type, int level_difficulty, string phobie_name){
         GameObject current_phobie = null;
-        switch (levelChoice)
+        switch (level_type)
         {   
             case "arachnophobie":
+                if(level_difficulty == 5){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_5") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = "Spider_server";
+                    current_phobie.transform.position = spiderPosition;
+
+
+                    /*
+                    // Chargez la texture depuis le dossier "Materials"
+                    Texture spiderTexture = Resources.Load("Materials/your_spider_texture") as Texture;
+
+                    // Récupérez le composant Renderer du GameObject
+                    Renderer spiderRenderer = current_phobie.GetComponent<Renderer>();
+
+                    // Assurez-vous que le composant Renderer existe et que la texture est chargée correctement
+                    if (spiderRenderer != null && spiderTexture != null)
+                    {
+                        // Appliquez la texture sur le GameObject
+                        spiderRenderer.material.mainTexture = spiderTexture;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("La texture ou le Renderer n'ont pas été trouvés.");
+                    }
+                    */
+                }
+
                 if(level_difficulty == 6){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_6") as GameObject;
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_client";
+                    current_phobie.name = "Spider_server";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -59,7 +160,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_client";
+                    current_phobie.name = "Spider_server";
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -68,24 +169,24 @@ public class DataSync : NetworkBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_client";
+                    current_phobie.name = "Spider_server";
                     current_phobie.transform.position = spiderPosition;
                 }
 
                 break;
 
+            // TODO : Add acrophobie gameobject
             case "acrophobie":
                 break;
 
             case "ophiophobie":
-
                 if (level_difficulty == 3)
                 {
                     var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -95,7 +196,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -105,7 +206,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -114,7 +215,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -123,7 +224,7 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -132,130 +233,42 @@ public class DataSync : NetworkBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = "Snake_server";
                     current_phobie.transform.position = snakePosition;
                 }
-
                 break;
         }
     }
 
     /// <summary>
-    /// Remove current Spider or Snake GameObject for client side
+    /// Hide the phobie gameobject of the server
     /// </summary>
-    [ClientRpc]
-    public void RemoveGameObject(){
-        var current_phobie = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Spider"));
+    /// <param name="current_phobie">The current phobie used</param>
+    /// <returns></returns>
+    public GameObject HideServerGameObject(GameObject current_phobie){
+        current_phobie = GameObject.FindWithTag("Spider");
 
         if (current_phobie == null) {
-            current_phobie = Resources
-                .FindObjectsOfTypeAll<GameObject>()
-                .FirstOrDefault(g=>g.CompareTag("Snake"));
-        }
-
-        if (current_phobie != null){
-            Destroy(current_phobie);
-        }
-    }
-
-    /// <summary>
-    /// Remove sound and reset skybox to default for client side
-    /// </summary>
-    [ClientRpc]
-    public void DeleteSoundAndSkyBox(){
-        // Get music GameObject
-        var music = GameObject.Find("Music_client");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        
-        // Stop sound
-        sound.Stop();
-
-        // Destroy GameObject
-        Destroy(music);
-
-        // Update SkyBox to default
-        var skybox = Resources.Load("materials/default") as Material;
-        RenderSettings.skybox = skybox;
-    }
-
-    /// <summary>
-    /// Deactivate the level to comfort the player for client side
-    /// </summary>
-    /// <param name="current_level">The current phobie selected</param>
-    [ClientRpc]
-    public void DeactivateLevel(String current_level){
-        // Get music GameObject
-        var music = GameObject.Find("Music_client");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        sound.Pause();
-
-        // Apply default skybox in function of current phobie
-        Material skybox;
-        switch(current_level){
-            case "arachnophobie":
-                Debug.Log("Comfort arachnophobie");
-                skybox = Resources.Load("materials/comfort_arachnophobie") as Material;
-                break;
-
-            case "acrophobie":
-                Debug.Log("Comfort acrophobie");
-                skybox = Resources.Load("materials/comfort_acrophobie") as Material;
-                break;
-
-            case "ophiophobie":
-                Debug.Log("Comfort ophiophobie");
-                skybox = Resources.Load("materials/comfort_ophiophobie") as Material;
-                break;
-
-            default:
-                Debug.Log("This should not arrive...");
-                skybox = Resources.Load("materials/default") as Material;
-                break;
-
-        }
-
-        RenderSettings.skybox = skybox;
-
-        //Hide phobie GameObject
-        var current_phobie = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Spider"));
-
-        if (current_phobie == null) {
-            current_phobie = Resources
-                .FindObjectsOfTypeAll<GameObject>()
-                .FirstOrDefault(g=>g.CompareTag("Snake"));
+            current_phobie = GameObject.FindWithTag("Snake");
         }
 
         if (current_phobie != null){
             current_phobie.SetActive(false);
         }
+
+        return current_phobie;
     }
 
     /// <summary>
-    /// Reactivate the level for client side
+    /// Research the current hidden GameObject phobie
+    /// WARNING : When a GameObject is hidden and his not accessible to through the script, it return a null value when you try to reach it
+    /// So we use this code to found the current phobie with the tag associated
+    /// This method is used to avoid passing an GameObject by function parameters when it's not possible
+    /// This is due to the serialization of GameObject with mirror which is incompatible.
+    /// This method is not recommanded and need to change in the future
     /// </summary>
-    /// <param name="previous_skybox">The previous skybox used for the current level</param>
-    [ClientRpc]
-    public void ReactivateLevel(String previous_skybox){
-        // Get music GameObject
-        var music = GameObject.Find("Music_client");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        sound.UnPause();
-
-        // Reapply previous skybox
-        var previous_skybox_splited = previous_skybox.Split(" (")[0];
-        RenderSettings.skybox = Resources.Load($"materials/{previous_skybox_splited}") as Material;
-
-        //Show phobie GameObject
+    /// <returns></returns>
+    public GameObject GetCurrentPhobie(){
         var current_phobie = Resources
             .FindObjectsOfTypeAll<GameObject>()
             .FirstOrDefault(g=>g.CompareTag("Spider"));
@@ -265,6 +278,16 @@ public class DataSync : NetworkBehaviour
                 .FindObjectsOfTypeAll<GameObject>()
                 .FirstOrDefault(g=>g.CompareTag("Snake"));
         }
+        // TODO : Add acrophobie to phobie
+
+        return current_phobie;
+    }
+
+    /// <summary>
+    /// Show the current phobie GameObject
+    /// </summary>
+    public void ShowClientGameObject(){
+        var current_phobie = this.GetCurrentPhobie();
 
         if (current_phobie != null){
             current_phobie.SetActive(true);
@@ -272,58 +295,24 @@ public class DataSync : NetworkBehaviour
     }
 
     /// <summary>
-    /// Liaison function that calls the main function to set the sound and the skybox for client side
+    /// Hide the current phobie GameObject
     /// </summary>
-    /// <param name="sound_name">The name of the sound</param>
-    /// <param name="skybox_name">The name of the skybox</param>
-    public void UpdateData(String sound_name, String skybox_name)
-    {
-        Debug.Log("UpdateSoundAndSkybox from client...");
-        UpdateSoundAndSkybox(sound_name, skybox_name);
+    public void HideClientGameObject(){
+        var current_phobie = this.GetCurrentPhobie();
+
+        if (current_phobie != null){
+            current_phobie.SetActive(false);
+        }
     }
 
     /// <summary>
-    /// Liaison function that calls the main function to set Snake or Spider GameObject for client side
+    /// Remove GameObject of Snake and Spider
     /// </summary>
-    /// <param name="levelChoice">The current phobie selected</param>
-    /// <param name="level_difficulty">The current difficulty of the level</param>
-    public void UpdatePhobie(String levelChoice, int level_difficulty)
-    {
-        Debug.Log("UpdateGameObject from client...");
-        UpdateGameObject(levelChoice, level_difficulty);
-    }
+    public void RemovePhobieGameObject(){
+        var current_phobie = this.GetCurrentPhobie();
 
-    /// <summary>
-    /// Liaison function that calls the main function to remove the sound and the skybox for client side
-    /// </summary>
-    public void DeleteData(){
-        Debug.Log("DeleteSoundAndSkyBox from client...");
-        DeleteSoundAndSkyBox();
-    }
-
-    /// <summary>
-    /// Liaison function that calls the main function to remove the Snake or Snider GameObject for client side
-    /// </summary>
-    public void DeletePhobie(){
-        Debug.Log("DeleteGameObject from client...");
-        RemoveGameObject();
-    }
-
-    /// <summary>
-    /// Liaison function that calls the main function to deactivate or reactivate the level for client side
-    /// </summary>
-    /// <param name="is_active"></param>
-    /// <param name="previous_skybox"></param>
-    /// <param name="current_level"></param>
-    public void Comfort(bool is_active, String previous_skybox, String current_level){
-        if (!is_active){
-            Debug.Log("Comfort from client...");
-            DeactivateLevel(current_level);
-            is_active = true;
-        } else {
-            Debug.Log("Reactive from client...");
-            ReactivateLevel(previous_skybox);
-            is_active = false;
+        if (current_phobie != null){
+            Destroy(current_phobie);
         }
     }
 }

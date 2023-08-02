@@ -4,14 +4,19 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+using static DataSync;
+
 public class LevelStop : MonoBehaviour
 {
     public Button stopLevel;
     public GameObject ComfortSetting;
+
+    private DataSync dataSync;
     
     // Start is called before the first frame update
     void Start()
     {
+        dataSync = new DataSync();
         Button btn = stopLevel.GetComponent<Button>();
 		btn.onClick.AddListener(StopLevel);
     }
@@ -20,52 +25,26 @@ public class LevelStop : MonoBehaviour
     /// Stop the current level for server side
     /// </summary>
     void StopLevel(){
-        // Get music GameObject
-        var music = GameObject.Find("Music_server");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        
-        // Stop sound
-        sound.Stop();
-
-        // Destroy GameObject
-        Destroy(music);
+        // Remove current sound
+        dataSync.RemoveSound("Music_server");
 
         // Update SkyBox to default
-        var skybox = Resources.Load("materials/default") as Material;
-        RenderSettings.skybox = skybox;
+        dataSync.ResetSkybox();
 
         //Remove phobie GameObject
-        var current_phobie = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Spider"));
-
-        if (current_phobie == null) {
-            current_phobie = Resources
-                .FindObjectsOfTypeAll<GameObject>()
-                .FirstOrDefault(g=>g.CompareTag("Snake"));
-        }
-
-        if (current_phobie != null){
-            Destroy(current_phobie);
-        }
+        dataSync.RemovePhobieGameObject();
 
         // Reset comfort settings
-        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
-        quit_button.interactable = true;
-        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
-        comfort_text.text = "Réconforter";
-        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
+        dataSync.ResetComfortSetting(ComfortSetting);
 
         // Update Sound and Skybox (CLIENT SIDE !)
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
-        skyboxPlayer.AddComponent<DataSync>();
-        skyboxPlayer.GetComponent<DataSync>().DeleteData();
+        skyboxPlayer.AddComponent<ClientSync>();
+        skyboxPlayer.GetComponent<ClientSync>().DeleteData();
 
         // Update Gameobject (CLIENT SIDE !)
         GameObject phobiePlayer = GameObject.Find("phobiePlayer");
-        phobiePlayer.AddComponent<DataSync>();
-        phobiePlayer.GetComponent<DataSync>().DeletePhobie();
+        phobiePlayer.AddComponent<ClientSync>();
+        phobiePlayer.GetComponent<ClientSync>().DeletePhobie();
     }
 }
