@@ -114,6 +114,8 @@ public class DataSync : MonoBehaviour
     /// <param name="phobie_name">The name of the phobie</param>
     public void CreateGameObject(string level_type, int level_difficulty, string phobie_name){
         GameObject current_phobie = null;
+        // TODO : We need to fix the position for the smartphone and PC
+        // There is a small difference for the distance 
         switch (level_type)
         {   
             case "arachnophobie":
@@ -179,7 +181,7 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 4)
                 {
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
-                    Vector3 balloonPosition = new Vector3(15, -20, 0);
+                    Vector3 balloonPosition = new Vector3(15, -25, 0);
                     current_phobie = Instantiate(balloonPrefab);
                     current_phobie.tag = "Balloon";
                     current_phobie.name = "Balloon_server";
@@ -190,7 +192,7 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 8)
                 {
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
-                    Vector3 balloonPosition = new Vector3(15, -20, 0);
+                    Vector3 balloonPosition = new Vector3(15, -25, 0);
                     current_phobie = Instantiate(balloonPrefab);
                     current_phobie.tag = "Balloon";
                     current_phobie.name = "Balloon_server";
@@ -271,6 +273,10 @@ public class DataSync : MonoBehaviour
 
         if (current_phobie == null) {
             current_phobie = GameObject.FindWithTag("Snake");
+        }
+
+        if (current_phobie == null) {
+            current_phobie = GameObject.FindWithTag("Balloon");
         }
 
         if (current_phobie != null){
