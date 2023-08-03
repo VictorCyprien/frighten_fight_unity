@@ -114,6 +114,8 @@ public class DataSync : MonoBehaviour
     /// <param name="phobie_name">The name of the phobie</param>
     public void CreateGameObject(string level_type, int level_difficulty, string phobie_name){
         GameObject current_phobie = null;
+        // TODO : We need to fix the position for the smartphone and PC
+        // There is a small difference for the distance 
         switch (level_type)
         {   
             case "arachnophobie":
@@ -175,8 +177,29 @@ public class DataSync : MonoBehaviour
 
                 break;
 
-            // TODO : Add acrophobie gameobject
             case "acrophobie":
+                if (level_difficulty == 4)
+                {
+                    var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
+                    Vector3 balloonPosition = new Vector3(15, -25, 0);
+                    current_phobie = Instantiate(balloonPrefab);
+                    current_phobie.tag = "Balloon";
+                    current_phobie.name = "Balloon_server";
+                    current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
+                }
+
+                if (level_difficulty == 8)
+                {
+                    var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
+                    Vector3 balloonPosition = new Vector3(15, -25, 0);
+                    current_phobie = Instantiate(balloonPrefab);
+                    current_phobie.tag = "Balloon";
+                    current_phobie.name = "Balloon_server";
+                    current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
+                }
+                
                 break;
 
             case "ophiophobie":
@@ -244,12 +267,16 @@ public class DataSync : MonoBehaviour
     /// Hide the phobie gameobject of the server
     /// </summary>
     /// <param name="current_phobie">The current phobie used</param>
-    /// <returns></returns>
+    /// <returns>A GameObject with the current phobie</returns>
     public GameObject HideServerGameObject(GameObject current_phobie){
         current_phobie = GameObject.FindWithTag("Spider");
 
         if (current_phobie == null) {
             current_phobie = GameObject.FindWithTag("Snake");
+        }
+
+        if (current_phobie == null) {
+            current_phobie = GameObject.FindWithTag("Balloon");
         }
 
         if (current_phobie != null){
@@ -267,7 +294,7 @@ public class DataSync : MonoBehaviour
     /// This is due to the serialization of GameObject with mirror which is incompatible.
     /// This method is not recommanded and need to change in the future
     /// </summary>
-    /// <returns></returns>
+    /// <returns>A GameObject with the current phobie</returns>
     public GameObject GetCurrentPhobie(){
         var current_phobie = Resources
             .FindObjectsOfTypeAll<GameObject>()
@@ -278,7 +305,12 @@ public class DataSync : MonoBehaviour
                 .FindObjectsOfTypeAll<GameObject>()
                 .FirstOrDefault(g=>g.CompareTag("Snake"));
         }
-        // TODO : Add acrophobie to phobie
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Balloon"));
+        }
 
         return current_phobie;
     }

@@ -11,6 +11,7 @@ TagManager:
   - Spider
   - Snake
   - Comfort
+  - Balloon
   layers:
   - Default
   - TransparentFX
