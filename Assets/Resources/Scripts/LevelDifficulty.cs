@@ -28,7 +28,13 @@ public class LevelDifficulty : MonoBehaviour
             case "acrophobie":
                 sound_name = "acrophobie_sound";
                 skybox_name = "acrophobie_view";
-                dataSync.CreateGameObject(level_type, level_difficulty, "Balloon_server");
+                string phobie_name = null;
+                if(level_difficulty == 5){
+                    phobie_name = "Fence_server";
+                } else {
+                    phobie_name = "Balloon_server";
+                }
+                dataSync.CreateGameObject(level_type, level_difficulty, phobie_name);
                 break;
 
             case "ophiophobie":
