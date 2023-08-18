@@ -124,7 +124,7 @@ public class DataSync : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
 
 
@@ -153,7 +153,7 @@ public class DataSync : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -162,7 +162,7 @@ public class DataSync : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -171,7 +171,7 @@ public class DataSync : MonoBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
                 }
 
@@ -181,23 +181,34 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 4)
                 {
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
-                    Vector3 balloonPosition = new Vector3(15, -25, 0);
+                    Vector3 balloonPosition = new Vector3(15, -22, 0);
                     current_phobie = Instantiate(balloonPrefab);
                     current_phobie.tag = "Balloon";
-                    current_phobie.name = "Balloon_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(105f, 105f, 105f);
+                }
+
+                if (level_difficulty == 5)
+                {
+                    var fencePrefab = Resources.Load("prefabs/acrophobie/fence_level_5") as GameObject;
+                    Vector3 fencePosition = new Vector3(-124, -101, -115);
+                    current_phobie = Instantiate(fencePrefab);
+                    current_phobie.tag = "Fence";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = fencePosition;
                     current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
                 }
 
                 if (level_difficulty == 8)
                 {
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
-                    Vector3 balloonPosition = new Vector3(15, -25, 0);
+                    Vector3 balloonPosition = new Vector3(15, -22, 0);
                     current_phobie = Instantiate(balloonPrefab);
                     current_phobie.tag = "Balloon";
-                    current_phobie.name = "Balloon_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = balloonPosition;
-                    current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
+                    current_phobie.transform.localScale = new Vector3(105f, 105f, 105f);
                 }
                 
                 break;
@@ -209,7 +220,7 @@ public class DataSync : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -219,7 +230,7 @@ public class DataSync : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -229,7 +240,7 @@ public class DataSync : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -238,7 +249,7 @@ public class DataSync : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -247,7 +258,7 @@ public class DataSync : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
 
@@ -256,7 +267,7 @@ public class DataSync : MonoBehaviour
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_server";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
                 break;
@@ -277,6 +288,10 @@ public class DataSync : MonoBehaviour
 
         if (current_phobie == null) {
             current_phobie = GameObject.FindWithTag("Balloon");
+        }
+
+        if (current_phobie == null) {
+            current_phobie = GameObject.FindWithTag("Fence");
         }
 
         if (current_phobie != null){
@@ -310,6 +325,12 @@ public class DataSync : MonoBehaviour
             current_phobie = Resources
                 .FindObjectsOfTypeAll<GameObject>()
                 .FirstOrDefault(g=>g.CompareTag("Balloon"));
+        }
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Fence"));
         }
 
         return current_phobie;

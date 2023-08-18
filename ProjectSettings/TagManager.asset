@@ -12,6 +12,7 @@ TagManager:
   - Snake
   - Comfort
   - Balloon
+  - Fence
   layers:
   - Default
   - TransparentFX

@@ -46,7 +46,13 @@ public class ClientSync : NetworkBehaviour
                 break;
 
             case "acrophobie":
-                dataSync.CreateGameObject(levelChoice, level_difficulty, "Balloon_client");
+                string phobie_name = null;
+                if(level_difficulty == 5){
+                    phobie_name = "Fence_client";
+                } else {
+                    phobie_name = "Balloon_client";
+                }
+                dataSync.CreateGameObject(levelChoice, level_difficulty, phobie_name);
                 break;
 
             case "ophiophobie":
