@@ -453,6 +453,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   boundingBoxSize: 30
+  angle: 270
 --- !u!1 &1729693869659672010
 GameObject:
   m_ObjectHideFlags: 0
