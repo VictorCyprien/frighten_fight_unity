@@ -254,10 +254,11 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 3)
                 {
                     var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    Vector3 snakePosition = new Vector3(20, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
                     current_phobie.name = phobie_name;
+                    current_phobie.transform.Rotate(90, 1, 180);
                     current_phobie.transform.position = snakePosition;
                 }
 
