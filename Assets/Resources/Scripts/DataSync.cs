@@ -254,21 +254,24 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 3)
                 {
                     var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    Vector3 snakePosition = new Vector3(20, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
                     current_phobie.name = phobie_name;
+                    current_phobie.transform.Rotate(90, 1, 180);
                     current_phobie.transform.position = snakePosition;
                 }
 
                 if (level_difficulty == 4)
                 {
                     var snakePrefab = Resources.Load("prefabs/snake/fake_snake/snake_level_4") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    Vector3 snakePosition = new Vector3(15, -5, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
+                    current_phobie.transform.Rotate(0, 1, 180);
+                    current_phobie.transform.localScale = new Vector3(5, 5, 5);
                 }
 
                 if (level_difficulty == 5)
@@ -282,26 +285,28 @@ public class DataSync : MonoBehaviour
                 }
 
                 if (level_difficulty == 6){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_6") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_6") as GameObject;
+                    Vector3 snakePosition = new Vector3(160, -15, 30);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
+                    
                 }
 
                 if(level_difficulty == 7){
                     var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_7") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    Vector3 snakePosition = new Vector3(20, -5, 30);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
                     current_phobie.name = phobie_name;
+                    current_phobie.transform.Rotate(180, 1, 180);
                     current_phobie.transform.position = snakePosition;
                 }
 
                 if(level_difficulty == 8){
-                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_7") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_8") as GameObject;
+                    Vector3 snakePosition = new Vector3(120, -15, 30);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
                     current_phobie.name = phobie_name;
