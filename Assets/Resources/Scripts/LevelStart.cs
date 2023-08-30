@@ -9,6 +9,9 @@ using System;
 using static LevelDifficulty;
 using static DataSync;
 
+/// <summary>
+/// This class launches the simulation of a level
+/// </summary>
 public class LevelStart : MonoBehaviour
 {
     public GameObject levelChoice;
@@ -18,7 +21,9 @@ public class LevelStart : MonoBehaviour
     public int minValue = 1;
     public int maxValue = 8;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         Button btn = startLevel.GetComponent<Button>();

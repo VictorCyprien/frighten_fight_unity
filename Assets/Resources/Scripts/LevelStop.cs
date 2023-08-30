@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 using static DataSync;
 
+/// <summary>
+/// This class stop the simulation of a level
+/// </summary>
 public class LevelStop : MonoBehaviour
 {
     public Button stopLevel;
@@ -13,7 +16,9 @@ public class LevelStop : MonoBehaviour
 
     private DataSync dataSync;
     
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         dataSync = new DataSync();

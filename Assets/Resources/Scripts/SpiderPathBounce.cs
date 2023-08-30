@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class manages spider animation
+/// This is the new class that manage the movement of the spider
+/// </summary>
 public class SpiderPathBounce : MonoBehaviour
 {
     public float speed = 2f;                // La vitesse de déplacement
@@ -14,6 +18,9 @@ public class SpiderPathBounce : MonoBehaviour
     private Vector3 moveDirection;          // Direction de mouvement
     private Animator animatorComponent;
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     private void Start()
     {
         // Mémorisation de la position d'apparition
@@ -30,6 +37,9 @@ public class SpiderPathBounce : MonoBehaviour
         animatorComponent.Play("Walk");
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     private void Update()
     {
         // Calcul du déplacement
@@ -60,7 +70,9 @@ public class SpiderPathBounce : MonoBehaviour
         }
     }
 
-    // Calcule la prochaine position cible
+    /// <summary>
+    /// Calculates next target position
+    /// </summary>
     private void CalculateNextTargetPosition()
     {
         targetPosition = spawnPosition + moveDirection * boundingBoxSize * 2; // Double de la taille pour atteindre le bord opposé

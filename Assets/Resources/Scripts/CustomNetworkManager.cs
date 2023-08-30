@@ -19,6 +19,9 @@ public class CustomNetworkManager : NetworkManager
 
     private DataSync dataSync;
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     new void Start(){
         dataSync = new DataSync();
     } 
@@ -94,5 +97,4 @@ public class CustomNetworkManager : NetworkManager
         waitingCamera.GetComponent<CreateWaitingForServerCamera>().CreateCamera();
         checkPlatform.GetComponent<CheckPlatform>().SetupClient();
     }
-
 }

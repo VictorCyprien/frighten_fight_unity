@@ -7,11 +7,17 @@ using System;
 
 using static DataSync;
 
+/// <summary>
+/// This class maintains synchronization between client and server
+/// </summary>
 public class ClientSync : NetworkBehaviour
 {
 
     DataSync dataSync;
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start(){
         dataSync = new DataSync();
     }

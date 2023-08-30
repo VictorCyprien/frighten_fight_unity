@@ -4,6 +4,9 @@ using UnityEngine;
 
 using static DataSync;
 
+/// <summary>
+/// This class is used to determine the level of difficulty and the type of phobia.
+/// </summary>
 public class LevelDifficulty : MonoBehaviour
 {
     /// <summary>

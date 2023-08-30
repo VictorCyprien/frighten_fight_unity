@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 using static DataSync;
 
+/// <summary>
+/// This class manages the 'Comfort' mode functionality
+/// </summary>
 public class ComfortPlayer : MonoBehaviour
 {
     public Button comfort;
@@ -17,7 +20,9 @@ public class ComfortPlayer : MonoBehaviour
     private Material previous_skybox = null;
     private DataSync dataSync;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         dataSync = new DataSync();

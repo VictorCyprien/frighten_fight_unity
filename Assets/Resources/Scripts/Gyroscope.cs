@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class manages the smartphone's gyroscope functionality 
+/// </summary>
 public class Gyroscope : MonoBehaviour
 {
     private bool gyroEnabled;
@@ -9,6 +12,9 @@ public class Gyroscope : MonoBehaviour
     private GameObject gyroControl;
     private Quaternion initialRotation;
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     private void Start()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -18,6 +24,10 @@ public class Gyroscope : MonoBehaviour
         initialRotation = Quaternion.Euler(90f, 0f, 0f);
     }
 
+    /// <summary>
+    /// Check gyroscope availability
+    /// </summary>
+    /// <returns>A boolean that determines whether the gyroscope is available on the device</returns>
     private bool EnableGyro()
     {
         if (SystemInfo.supportsGyroscope)
@@ -37,6 +47,9 @@ public class Gyroscope : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     private void Update()
     {
         if (gyroEnabled)
@@ -48,7 +61,11 @@ public class Gyroscope : MonoBehaviour
 
     }
 
-    // Fix gyroscope orientation
+    /// <summary>
+    /// Fix the position of the gyroscope to be synchronize with Unity
+    /// </summary>
+    /// <param name="q">The current attitude of the gyroscope</param>
+    /// <returns>A new quaternion fixed for Unity</returns>
     private static Quaternion GyroToUnity(Quaternion q)
     {
         return new Quaternion(q.x, q.y, -q.z, -q.w);

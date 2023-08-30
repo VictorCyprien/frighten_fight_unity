@@ -5,6 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
+/// <summary>
+/// This class checks the level and phobia selected and displays a description of the level.
+/// </summary>
 public class CheckValue : MonoBehaviour
 {
     public Scrollbar difficulty_selector;
@@ -21,8 +24,6 @@ public class CheckValue : MonoBehaviour
     /// </summary>
     /// <param name="level_difficulty">Difficulty of the level</param>
     /// <returns>A string with the description of the level</returns>
-    
-    // TODO : Add new description for acrophobie
     string build_new_description(int level_difficulty, string current_level){
         string msg = "";
 
@@ -120,6 +121,9 @@ public class CheckValue : MonoBehaviour
         Debug.Log($"Value of Difficulty : {difficulty_text.text}");
     }
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         difficulty_selector.onValueChanged.AddListener(OnScrollbarValueChanged);

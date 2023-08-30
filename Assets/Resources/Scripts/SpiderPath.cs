@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class manages spider animation
+/// This is a old class that manage the movement of the spider 
+/// </summary>
 public class SpiderPath : MonoBehaviour
 {
     public float radius = 14f;          // Le rayon du cercle
@@ -13,6 +17,9 @@ public class SpiderPath : MonoBehaviour
 
     private Animator animatorComponent;
 
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     private void Start()
     {
         // Lancement animation
@@ -33,6 +40,9 @@ public class SpiderPath : MonoBehaviour
         transform.position = centerPosition + Vector3.right * radius;
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     private void Update()
     {
         // Mise à jour de l'angle en fonction du temps écoulé depuis le début de la scène

@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This class manages snake animation for level 7
+/// </summary>
 public class Snake7 : MonoBehaviour
 {
-
     public float radius = 100000000f;          // Le rayon du cercle
     public float speed = 1000f;          // La vitesse de déplacement circulaire
     public float rotationOffset = 90f;  // L'angle de décalage pour la rotation
@@ -13,7 +15,9 @@ public class Snake7 : MonoBehaviour
     private Vector3 centerPosition;     // La position du centre du cercle
     private Animator animatorComponent;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         // Lancement animation
@@ -25,7 +29,9 @@ public class Snake7 : MonoBehaviour
         transform.position = centerPosition + Vector3.right * radius;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
     void Update()
     {
         // Mise à jour de l'angle en fonction du temps écoulé depuis le début de la scène

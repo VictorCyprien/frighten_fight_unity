@@ -4,6 +4,9 @@ using UnityEngine;
 using Mirror;
 using Mirror.Discovery;
 
+/// <summary>
+/// This class is used to check the platform on which the application is launched.
+/// </summary>
 public class CheckPlatform : MonoBehaviour
 {
     public bool DEBUG;
@@ -17,7 +20,9 @@ public class CheckPlatform : MonoBehaviour
     private GameObject waitingForServer;
     private NetworkManager CurrentNetworkManager;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         // Get NetworkManager component
