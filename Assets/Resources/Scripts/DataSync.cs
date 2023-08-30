@@ -284,7 +284,7 @@ public class DataSync : MonoBehaviour
                 }
 
                 if (level_difficulty == 6){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_6") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_6") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
@@ -302,7 +302,7 @@ public class DataSync : MonoBehaviour
                 }
 
                 if(level_difficulty == 8){
-                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_7") as GameObject;
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_8") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
