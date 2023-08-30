@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -47,6 +51,22 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('functions_func.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -69,30 +89,81 @@ $(function() {
 </div>
 
 <div class="contents">
-<div class="textblock">Here is a list of all documented functions with links to the class documentation for each member:</div><ul>
-<li>Comfort()&#160;:&#160;<a class="el" href="class_comfort_player.html#a59569746df3914682dee882d3c0719c8">ComfortPlayer</a>, <a class="el" href="class_data_sync.html#acd586193f602f741432b57a39fdd34b5">DataSync</a></li>
+<div class="textblock">Here is a list of all documented functions with links to the class documentation for each member:</div>
+
+<h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
+<li>Comfort()&#160;:&#160;<a class="el" href="class_client_sync.html#adf583fc581c7c14dc04786cfefc11262">ClientSync</a>, <a class="el" href="class_comfort_player.html#a59569746df3914682dee882d3c0719c8">ComfortPlayer</a></li>
 <li>CreateCamera()&#160;:&#160;<a class="el" href="class_create_waiting_for_server_camera.html#aec34d8d5b513632242e4a413916b239b">CreateWaitingForServerCamera</a></li>
-<li>DeactivateLevel()&#160;:&#160;<a class="el" href="class_comfort_player.html#a95e8e2b31757abcec6e54fafa7f979ae">ComfortPlayer</a>, <a class="el" href="class_data_sync.html#aa02a78e4c2b0eb97d57c07104d411d41">DataSync</a></li>
-<li>DeleteData()&#160;:&#160;<a class="el" href="class_data_sync.html#abea4d6b0e397352d161ed4d017abce6c">DataSync</a></li>
-<li>DeletePhobie()&#160;:&#160;<a class="el" href="class_data_sync.html#a9d95151d33dff12dadb1d8d3b52afce7">DataSync</a></li>
-<li>DeleteSoundAndSkyBox()&#160;:&#160;<a class="el" href="class_data_sync.html#abd521f2691dd46290b647c540093b1fe">DataSync</a></li>
+<li>CreateGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#aa72bfec429a67b2cc0c1b9f24e514154">DataSync</a></li>
+<li>CreateSound()&#160;:&#160;<a class="el" href="class_data_sync.html#a2d21d06c2f7ad2bd441d36c5d9af9fe4">DataSync</a></li>
+</ul>
+
+
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>DeactivateLevel()&#160;:&#160;<a class="el" href="class_client_sync.html#ae8d03f7adf2cd1725664318a785aabcb">ClientSync</a>, <a class="el" href="class_comfort_player.html#a95e8e2b31757abcec6e54fafa7f979ae">ComfortPlayer</a></li>
+<li>DeleteData()&#160;:&#160;<a class="el" href="class_client_sync.html#aa583305f09120698aa5b64e63f93d271">ClientSync</a></li>
+<li>DeletePhobie()&#160;:&#160;<a class="el" href="class_client_sync.html#a950950d8735df2f24f6bf3b04b80f3ee">ClientSync</a></li>
+<li>DeleteSoundAndSkyBox()&#160;:&#160;<a class="el" href="class_client_sync.html#a9a44fba6ef38969cc334bb4c32b2dcff">ClientSync</a></li>
 <li>DestroyCamera()&#160;:&#160;<a class="el" href="class_create_waiting_for_server_camera.html#a11cef73d155aa2904b915be22f320113">CreateWaitingForServerCamera</a></li>
+</ul>
+
+
+<h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
+<li>GetCurrentPhobie()&#160;:&#160;<a class="el" href="class_data_sync.html#a4ad6db6309be3f2e32bacc15163282d3">DataSync</a></li>
+</ul>
+
+
+<h3><a id="index_h" name="index_h"></a>- h -</h3><ul>
+<li>HideClientGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#ad4d83d41a35a58b24cec44788d444e04">DataSync</a></li>
+<li>HideServerGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#a1b47cc8dcb43333d071c9606a78e7916">DataSync</a></li>
+</ul>
+
+
+<h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
 <li>OnClientDisconnect()&#160;:&#160;<a class="el" href="class_custom_network_manager.html#a2817c59fdd50cd64930198ff795eacf7">CustomNetworkManager</a></li>
 <li>OnDiscoveredServer()&#160;:&#160;<a class="el" href="class_check_platform.html#af392ebb0bac70f2ba26564945262cd95">CheckPlatform</a></li>
 <li>OnServerConnect()&#160;:&#160;<a class="el" href="class_custom_network_manager.html#a9aee8dee54020589bde2448900ce35cf">CustomNetworkManager</a></li>
 <li>OnServerDisconnect()&#160;:&#160;<a class="el" href="class_custom_network_manager.html#aee5e7964dfbf1c3c0dc9d39f4c1da27c">CustomNetworkManager</a></li>
-<li>ReactivateLevel()&#160;:&#160;<a class="el" href="class_comfort_player.html#af577aa95e38f72d67566adfe3726bdfb">ComfortPlayer</a>, <a class="el" href="class_data_sync.html#a54d0ecdae7a31691cd6dfd3c7ba06219">DataSync</a></li>
-<li>RemoveGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#a50c39299a9c7e944c5b3e25abb17f3ae">DataSync</a></li>
+<li>OnStartLocalPlayer()&#160;:&#160;<a class="el" href="class_player_script.html#a00a0b4e4dea25c5da25ed3b9d2f40b03">PlayerScript</a></li>
+</ul>
+
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>PauseSound()&#160;:&#160;<a class="el" href="class_data_sync.html#aa548b2e0d7fa1cb7231ca73bc9c38a05">DataSync</a></li>
+</ul>
+
+
+<h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
+<li>ReactivateLevel()&#160;:&#160;<a class="el" href="class_client_sync.html#a677c0b925618a7d03cafb7c34329b071">ClientSync</a>, <a class="el" href="class_comfort_player.html#af577aa95e38f72d67566adfe3726bdfb">ComfortPlayer</a></li>
+<li>RemoveGameObject()&#160;:&#160;<a class="el" href="class_client_sync.html#ac9df957187aea3ae0f9955ab35d4b0ff">ClientSync</a></li>
+<li>RemovePhobieGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#a7e12edb6683f5aa1b4af9ac9dde5cde1">DataSync</a></li>
+<li>RemoveSound()&#160;:&#160;<a class="el" href="class_data_sync.html#a27cad558b39d3dbb82a0ace80c38be68">DataSync</a></li>
+<li>ResetComfortSetting()&#160;:&#160;<a class="el" href="class_data_sync.html#af538bfe8a6bd8234f79c3c3005e56c24">DataSync</a></li>
+<li>ResetSkybox()&#160;:&#160;<a class="el" href="class_data_sync.html#a1f0dd6bb84be2bcb673a2f7de2c8063c">DataSync</a></li>
+<li>ResumeSound()&#160;:&#160;<a class="el" href="class_data_sync.html#a3f59071df983941d23fcc2479fb1c8ea">DataSync</a></li>
+</ul>
+
+
+<h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>SetupClient()&#160;:&#160;<a class="el" href="class_check_platform.html#a275432e34583aa791280bad51e68256d">CheckPlatform</a></li>
-<li>UpdateData()&#160;:&#160;<a class="el" href="class_data_sync.html#a59f8f6f46a376910ae24ec4199813fc5">DataSync</a></li>
-<li>UpdateGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#a5fff2b6cc6224a4927ca4b9aa59f0c9e">DataSync</a></li>
-<li>UpdatePhobie()&#160;:&#160;<a class="el" href="class_data_sync.html#a7921fc1bb97472201b9e648849f13bdf">DataSync</a></li>
-<li>UpdateSoundAndSkybox()&#160;:&#160;<a class="el" href="class_data_sync.html#a0d95ab16f8ee6ed499d2aa574b9e4e51">DataSync</a></li>
+<li>ShowClientGameObject()&#160;:&#160;<a class="el" href="class_data_sync.html#aaa9a581223f3f443aa405421a86d6aea">DataSync</a></li>
+</ul>
+
+
+<h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
+<li>UpdateData()&#160;:&#160;<a class="el" href="class_client_sync.html#a735643ef442c1ef53791eebb68d86908">ClientSync</a></li>
+<li>UpdateGameObject()&#160;:&#160;<a class="el" href="class_client_sync.html#af66230b867c108a5b8f699ee1d0a775f">ClientSync</a></li>
+<li>UpdatePhobie()&#160;:&#160;<a class="el" href="class_client_sync.html#a1bf1c7b0ccb297eb707bfe1c0c26e5a2">ClientSync</a></li>
+<li>UpdateSkybox()&#160;:&#160;<a class="el" href="class_data_sync.html#a00ce118482a12a138fb53b45140d42bf">DataSync</a></li>
+<li>UpdateSoundAndSkybox()&#160;:&#160;<a class="el" href="class_client_sync.html#a7dd4cac8ff36b92065cddc7485e51701">ClientSync</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.7 </li>
+  </ul>
+</div>
 </body>
 </html>
