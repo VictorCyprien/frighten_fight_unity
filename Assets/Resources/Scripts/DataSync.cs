@@ -122,24 +122,26 @@ public class DataSync : MonoBehaviour
 
                 if(level_difficulty == 1){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_1") as GameObject;
-                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    Vector3 spiderPosition = new Vector3(10, 1, 90);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(7, 7, 7);
                 }
 
                 if(level_difficulty == 2){
-                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_1") as GameObject;
-                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_2") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 90);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(7, 7, 7);
                 }
 
                 if(level_difficulty == 3){
-                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_1") as GameObject;
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_3") as GameObject;
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
@@ -148,7 +150,7 @@ public class DataSync : MonoBehaviour
                 }
 
                 if(level_difficulty == 4){
-                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_1") as GameObject;
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_4") as GameObject;
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
@@ -163,6 +165,7 @@ public class DataSync : MonoBehaviour
                     current_phobie.tag = "Spider";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
 
 
                     /*
@@ -192,6 +195,7 @@ public class DataSync : MonoBehaviour
                     current_phobie.tag = "Spider";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 }
 
                 if(level_difficulty == 7){
