@@ -145,20 +145,23 @@ public class DataSync : MonoBehaviour
 
                 if(level_difficulty == 3){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_3") as GameObject;
-                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    Vector3 spiderPosition = new Vector3(6, -4.5f, -12.50f);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
                 }
 
                 if(level_difficulty == 4){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_4") as GameObject;
-                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    Vector3 spiderPosition = new Vector3(13, -4.5f, -0.5f);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.Rotate(0, 290, 0);
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
                 }
 
                 if(level_difficulty == 5){
