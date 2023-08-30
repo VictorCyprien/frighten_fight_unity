@@ -7,6 +7,8 @@ public class SpiderPathBounce : MonoBehaviour
     public float speed = 2f;                // La vitesse de déplacement
     public float boundingBoxSize = 5f;      // Taille de la zone rectangulaire
 
+    public float angle = 2f;
+
     private Vector3 spawnPosition;          // Position d'apparition de l'araignée
     private Vector3 targetPosition;         // Prochaine position cible
     private Vector3 moveDirection;          // Direction de mouvement
@@ -17,9 +19,8 @@ public class SpiderPathBounce : MonoBehaviour
         // Mémorisation de la position d'apparition
         spawnPosition = transform.position;
 
-        // Initialisation de la direction de mouvement avec un angle aléatoire
-        float randomAngle = Random.Range(0f, 360f);
-        moveDirection = Quaternion.Euler(0f, randomAngle, 0f) * Vector3.right;
+        // Initialisation de la direction de mouvement avec un angle prédéfini
+        moveDirection = Quaternion.Euler(0f, angle, 0f) * Vector3.right;
 
         // Calcul de la première position cible
         CalculateNextTargetPosition();
