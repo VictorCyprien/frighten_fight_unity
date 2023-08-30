@@ -115,7 +115,10 @@ public class DataSync : MonoBehaviour
     public void CreateGameObject(string level_type, int level_difficulty, string phobie_name){
         GameObject current_phobie = null;
         // TODO : We need to fix the position for the smartphone and PC
-        // There is a small difference for the distance 
+        // There is a small difference for the distance
+        RuntimePlatform platform = Application.platform;
+        bool isServer = (platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.WindowsPlayer);
+         
         switch (level_type)
         {   
             case "arachnophobie":
@@ -222,18 +225,30 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 4)
                 {
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
-                    Vector3 balloonPosition = new Vector3(15, -22, 0);
+                    Vector3 balloonPosition;
+                    if (isServer){
+                        balloonPosition = new Vector3(18, -28, 0);
+                    } else {
+                        balloonPosition = new Vector3(18, -25, 0);
+                    }
+                    
                     current_phobie = Instantiate(balloonPrefab);
                     current_phobie.tag = "Balloon";
                     current_phobie.name = phobie_name;
                     current_phobie.transform.position = balloonPosition;
-                    current_phobie.transform.localScale = new Vector3(105f, 105f, 105f);
+                    current_phobie.transform.localScale = new Vector3(120f, 120, 120f);
                 }
 
                 if (level_difficulty == 5)
                 {
                     var fencePrefab = Resources.Load("prefabs/acrophobie/fence_level_5") as GameObject;
-                    Vector3 fencePosition = new Vector3(-124, -101, -115);
+                    Vector3 fencePosition;
+                    if (isServer){
+                        fencePosition = new Vector3(-124, -101, -115);
+                    } else {
+                        fencePosition = new Vector3(-124, -101, -115);
+                    }
+                
                     current_phobie = Instantiate(fencePrefab);
                     current_phobie.tag = "Fence";
                     current_phobie.name = phobie_name;
@@ -244,7 +259,13 @@ public class DataSync : MonoBehaviour
                 if (level_difficulty == 8)
                 {
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
-                    Vector3 balloonPosition = new Vector3(15, -22, 0);
+                    Vector3 balloonPosition;
+                    if (isServer){
+                        balloonPosition = new Vector3(15, -22, 0);
+                    } else {
+                        balloonPosition = new Vector3(15, -22, 0);
+                    }
+                    
                     current_phobie = Instantiate(balloonPrefab);
                     current_phobie.tag = "Balloon";
                     current_phobie.name = phobie_name;
