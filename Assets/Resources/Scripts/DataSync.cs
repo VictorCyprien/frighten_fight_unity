@@ -2,47 +2,206 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Mirror;
-using System;
+using UnityEngine.UI;
 
-public class DataSync : NetworkBehaviour
+/// <summary>
+/// Basic class to call methods for both server and client side
+/// This is very useful to avoid to repeat some code with very minor changes
+/// </summary>
+public class DataSync : MonoBehaviour
 {
-
-    [ClientRpc]
-    public void UpdateSoundAndSkybox(String sound_name, String skybox_name)
-    {
-        Debug.Log("CLIENT !");
-
-        // Add music to play (client side)
+    /// <summary>
+    /// Create a GameObject with AudioSource Component
+    /// </summary>
+    /// <param name="sound_name">The name of the sound in the ressources folder</param>
+    /// <param name="object_name">The name of the object</param>
+    public void CreateSound(string sound_name, string object_name){
+        // Add music to play
         AudioClip sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
-        GameObject music = new GameObject("Music_client");
+        GameObject music = new GameObject(object_name);
         music.AddComponent<AudioSource>();
         music.GetComponent<AudioSource>().clip = sound;
         music.GetComponent<AudioSource>().loop = true;
         music.GetComponent<AudioSource>().Play();
+    }
 
-        // Update Skybox (client side)
+    /// <summary>
+    /// Pause the sound of a GameObject with AudioSource Component
+    /// </summary>
+    /// <param name="sound_name">The name of the GameObject</param>
+    public void PauseSound(string sound_name){
+        var music = GameObject.Find(sound_name);
+        var sound = music.GetComponent<AudioSource>();
+        sound.Pause();
+    }
+
+    /// <summary>
+    /// Resume the sound of a GameObject with AudioSource Component
+    /// </summary>
+    /// <param name="sound_name">The name of the GameObject</param>
+    public void ResumeSound(string sound_name){
+        var music = GameObject.Find(sound_name);
+        var sound = music.GetComponent<AudioSource>();
+        sound.UnPause();
+    }
+
+    /// <summary>
+    /// Update the skybox view
+    /// </summary>
+    /// <param name="skybox_name">The name of the skybox in the ressources folder</param>
+    public void UpdateSkybox(string skybox_name){
+        // Update Skybox
         Material skybox = Resources.Load($"materials/{skybox_name}") as Material;
         RenderSettings.skybox = skybox;
     }
 
 
-    [ClientRpc]
-    public void UpdateGameObject(String levelChoice, int level_difficulty)
-    {
-        Debug.Log("CLIENT !");
-        // Add Gameobject to client side
+    /// <summary>
+    /// Remove the sound GameObject
+    /// </summary>
+    /// <param name="name">The name of the GameObject</param>
+    public void RemoveSound(string name){
+        var current_sound = GameObject.Find(name);
+
+        if(current_sound != null){
+            Destroy(current_sound);
+        }
+    }
+
+    /// <summary>
+    /// Reset the skybox at default value
+    /// </summary>
+    public void ResetSkybox(){
+        var skybox = Resources.Load("materials/default") as Material;
+        RenderSettings.skybox = skybox;
+    }
+
+    public void Comfort(string current_level){
+        switch(current_level){
+            case "arachnophobie":
+                Debug.Log("Comfort arachnophobie");
+                this.UpdateSkybox("comfort_arachnophobie");
+                break;
+
+            case "acrophobie":
+                Debug.Log("Comfort acrophobie");
+                this.UpdateSkybox("comfort_acrophobie");
+                break;
+
+            case "ophiophobie":
+                Debug.Log("Comfort ophiophobie");
+                this.UpdateSkybox("comfort_ophiophobie");
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Reset the setting of comfort functionnality
+    /// </summary>
+    public void ResetComfortSetting(GameObject ComfortSetting){
+        var quit_button = ComfortSetting.GetComponent<ComfortPlayer>().quit;
+        quit_button.interactable = true;
+        var comfort_text = ComfortSetting.GetComponent<ComfortPlayer>().comfort_text;
+        comfort_text.text = "Réconforter";
+        ComfortSetting.GetComponent<ComfortPlayer>().is_active = false;
+    }
+
+    /// <summary>
+    /// Create a phobie GameObject
+    /// </summary>
+    /// <param name="level_type">The type of the phobie</param>
+    /// <param name="level_difficulty">The difficulty of the level</param>
+    /// <param name="phobie_name">The name of the phobie</param>
+    public void CreateGameObject(string level_type, int level_difficulty, string phobie_name){
         GameObject current_phobie = null;
-        switch (levelChoice)
+        // TODO : We need to fix the position for the smartphone and PC
+        // There is a small difference for the distance
+        RuntimePlatform platform = Application.platform;
+        bool isServer = (platform == RuntimePlatform.WindowsEditor || platform == RuntimePlatform.WindowsPlayer);
+         
+        switch (level_type)
         {   
             case "arachnophobie":
+
+                if(level_difficulty == 1){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_1") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 90);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(7, 7, 7);
+                }
+
+                if(level_difficulty == 2){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_2") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 90);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(7, 7, 7);
+                }
+
+                if(level_difficulty == 3){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_3") as GameObject;
+                    Vector3 spiderPosition = new Vector3(6, -4.5f, -12.50f);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
+                }
+
+                if(level_difficulty == 4){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_4") as GameObject;
+                    Vector3 spiderPosition = new Vector3(13, -4.5f, -0.5f);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.Rotate(0, 290, 0);
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.01f, 0.5f);
+                }
+
+                if(level_difficulty == 5){
+                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_5") as GameObject;
+                    Vector3 spiderPosition = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab);
+                    current_phobie.tag = "Spider";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+
+                    /*
+                    // Chargez la texture depuis le dossier "Materials"
+                    Texture spiderTexture = Resources.Load("Materials/your_spider_texture") as Texture;
+
+                    // Récupérez le composant Renderer du GameObject
+                    Renderer spiderRenderer = current_phobie.GetComponent<Renderer>();
+
+                    // Assurez-vous que le composant Renderer existe et que la texture est chargée correctement
+                    if (spiderRenderer != null && spiderTexture != null)
+                    {
+                        // Appliquez la texture sur le GameObject
+                        spiderRenderer.material.mainTexture = spiderTexture;
+                    }
+                    else
+                    {
+                        Debug.LogWarning("La texture ou le Renderer n'ont pas été trouvés.");
+                    }
+                    */
+                }
+
                 if(level_difficulty == 6){
                     var spiderPrefab = Resources.Load("prefabs/spider/spider_level_6") as GameObject;
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_client";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
+                    current_phobie.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
                 }
 
                 if(level_difficulty == 7){
@@ -50,158 +209,178 @@ public class DataSync : NetworkBehaviour
                     Vector3 spiderPosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(spiderPrefab);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_client";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = spiderPosition;
                 }
 
                 if(level_difficulty == 8){
-                    var spiderPrefab = Resources.Load("prefabs/spider/spider_level_8") as GameObject;
-                    Vector3 spiderPosition = new Vector3(10, 1, 0);
-                    current_phobie = Instantiate(spiderPrefab);
+                    var spiderPrefab1 = Resources.Load("prefabs/spider/spider_level_8") as GameObject;
+                    Vector3 spiderPosition1 = new Vector3(10, 1, 0);
+                    current_phobie = Instantiate(spiderPrefab1);
                     current_phobie.tag = "Spider";
-                    current_phobie.name = "Spider_client";
-                    current_phobie.transform.position = spiderPosition;
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = spiderPosition1;                
                 }
 
                 break;
 
             case "acrophobie":
+                if (level_difficulty == 4)
+                {
+                    var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
+                    Vector3 balloonPosition;
+                    if (isServer){
+                        balloonPosition = new Vector3(18, -27, 0);
+                    } else {
+                        balloonPosition = new Vector3(18, -30, 0);
+                    }
+                    
+                    current_phobie = Instantiate(balloonPrefab);
+                    current_phobie.tag = "Balloon";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(120f, 120, 120f);
+                }
+
+                if (level_difficulty == 5)
+                {
+                    var fencePrefab = Resources.Load("prefabs/acrophobie/fence_level_5") as GameObject;
+                    Vector3 fencePosition;
+                    if (isServer){
+                        fencePosition = new Vector3(-124, -101, -115);
+                    } else {
+                        fencePosition = new Vector3(-124, -101, -115);
+                    }
+                
+                    current_phobie = Instantiate(fencePrefab);
+                    current_phobie.tag = "Fence";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = fencePosition;
+                    current_phobie.transform.localScale = new Vector3(100f, 100f, 100f);
+                }
+
+                if (level_difficulty == 8)
+                {
+                    var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
+                    Vector3 balloonPosition;
+                    if (isServer){
+                        balloonPosition = new Vector3(15, -27, 0);
+                    } else {
+                        balloonPosition = new Vector3(15, -27, 0);
+                    }
+                    
+                    current_phobie = Instantiate(balloonPrefab);
+                    current_phobie.tag = "Balloon";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = balloonPosition;
+                    current_phobie.transform.localScale = new Vector3(105f, 105f, 105f);
+                }
+                
                 break;
 
             case "ophiophobie":
-                if(level_difficulty == 6){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_6") as GameObject;
+                if (level_difficulty == 3)
+                {
+                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_3") as GameObject;
+                    Vector3 snakePosition = new Vector3(20, 1, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.Rotate(90, 1, 180);
+                    current_phobie.transform.position = snakePosition;
+                }
+
+                if (level_difficulty == 4)
+                {
+                    var snakePrefab = Resources.Load("prefabs/snake/fake_snake/snake_level_4") as GameObject;
+                    Vector3 snakePosition = new Vector3(15, -5, 0);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = snakePosition;
+                    current_phobie.transform.Rotate(0, 1, 180);
+                    current_phobie.transform.localScale = new Vector3(5, 5, 5);
+                }
+
+                if (level_difficulty == 5)
+                {
+                    var snakePrefab = Resources.Load("prefabs/snake/crate_snake/snake_level_5") as GameObject;
                     Vector3 snakePosition = new Vector3(10, 1, 0);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
+                }
+
+                if (level_difficulty == 6){
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_6") as GameObject;
+                    Vector3 snakePosition = new Vector3(160, -15, 30);
+                    current_phobie = Instantiate(snakePrefab);
+                    current_phobie.tag = "Snake";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.position = snakePosition;
+                    
                 }
 
                 if(level_difficulty == 7){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_7") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_7") as GameObject;
+                    Vector3 snakePosition = new Vector3(20, -5, 30);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = phobie_name;
+                    current_phobie.transform.Rotate(180, 1, 180);
                     current_phobie.transform.position = snakePosition;
                 }
 
                 if(level_difficulty == 8){
-                    var snakePrefab = Resources.Load("prefabs/snake/snake_level_8") as GameObject;
-                    Vector3 snakePosition = new Vector3(10, 1, 0);
+                    var snakePrefab = Resources.Load("prefabs/snake/real_snake/snake_level_8") as GameObject;
+                    Vector3 snakePosition = new Vector3(120, -15, 30);
                     current_phobie = Instantiate(snakePrefab);
                     current_phobie.tag = "Snake";
-                    current_phobie.name = "Snake_client";
+                    current_phobie.name = phobie_name;
                     current_phobie.transform.position = snakePosition;
                 }
-
                 break;
         }
     }
 
-    [ClientRpc]
-    public void RemoveGameObject(){
-        var current_phobie = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Spider"));
+    /// <summary>
+    /// Hide the phobie gameobject of the server
+    /// </summary>
+    /// <param name="current_phobie">The current phobie used</param>
+    /// <returns>A GameObject with the current phobie</returns>
+    public GameObject HideServerGameObject(GameObject current_phobie){
+        current_phobie = GameObject.FindWithTag("Spider");
 
         if (current_phobie == null) {
-            current_phobie = Resources
-                .FindObjectsOfTypeAll<GameObject>()
-                .FirstOrDefault(g=>g.CompareTag("Snake"));
+            current_phobie = GameObject.FindWithTag("Snake");
         }
-
-        if (current_phobie != null){
-            Destroy(current_phobie);
-        }
-    }
-
-    [ClientRpc]
-    public void DeleteSoundAndSkyBox(){
-        // Get music GameObject
-        var music = GameObject.Find("Music_client");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        
-        // Stop sound
-        sound.Stop();
-
-        // Destroy GameObject
-        Destroy(music);
-
-        // Update SkyBox to default
-        var skybox = Resources.Load("materials/default") as Material;
-        RenderSettings.skybox = skybox;
-    }
-
-    [ClientRpc]
-    public void DeactivateLevel(String current_level){
-        // Get music GameObject
-        var music = GameObject.Find("Music_client");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        sound.Pause();
-
-        // Apply default skybox in function of current phobie
-        Material skybox;
-        switch(current_level){
-            case "arachnophobie":
-                Debug.Log("Comfort arachnophobie");
-                skybox = Resources.Load("materials/comfort_arachnophobie") as Material;
-                break;
-
-            case "acrophobie":
-                Debug.Log("Comfort acrophobie");
-                skybox = Resources.Load("materials/comfort_acrophobie") as Material;
-                break;
-
-            case "ophiophobie":
-                Debug.Log("Comfort ophiophobie");
-                skybox = Resources.Load("materials/comfort_ophiophobie") as Material;
-                break;
-
-            default:
-                Debug.Log("This should not arrive...");
-                skybox = Resources.Load("materials/default") as Material;
-                break;
-
-        }
-
-        RenderSettings.skybox = skybox;
-
-        //Hide phobie GameObject
-        var current_phobie = Resources
-            .FindObjectsOfTypeAll<GameObject>()
-            .FirstOrDefault(g=>g.CompareTag("Spider"));
 
         if (current_phobie == null) {
-            current_phobie = Resources
-                .FindObjectsOfTypeAll<GameObject>()
-                .FirstOrDefault(g=>g.CompareTag("Snake"));
+            current_phobie = GameObject.FindWithTag("Balloon");
+        }
+
+        if (current_phobie == null) {
+            current_phobie = GameObject.FindWithTag("Fence");
         }
 
         if (current_phobie != null){
             current_phobie.SetActive(false);
         }
+
+        return current_phobie;
     }
 
-    [ClientRpc]
-    public void ReactivateLevel(String previous_skybox){
-        // Get music GameObject
-        var music = GameObject.Find("Music_client");
-
-        // Get sound from GameObject
-        var sound = music.GetComponent<AudioSource>();
-        sound.UnPause();
-
-        // Reapply previous skybox
-        var previous_skybox_splited = previous_skybox.Split(" (")[0];
-        RenderSettings.skybox = Resources.Load($"materials/{previous_skybox_splited}") as Material;
-
-        //Show phobie GameObject
+    /// <summary>
+    /// Research the current hidden GameObject phobie
+    /// WARNING : When a GameObject is hidden and his not accessible to through the script, it return a null value when you try to reach it
+    /// So we use this code to found the current phobie with the tag associated
+    /// This method is used to avoid passing an GameObject by function parameters when it's not possible
+    /// This is due to the serialization of GameObject with mirror which is incompatible.
+    /// This method is not recommanded and need to change in the future
+    /// </summary>
+    /// <returns>A GameObject with the current phobie</returns>
+    public GameObject GetCurrentPhobie(){
         var current_phobie = Resources
             .FindObjectsOfTypeAll<GameObject>()
             .FirstOrDefault(g=>g.CompareTag("Spider"));
@@ -211,43 +390,52 @@ public class DataSync : NetworkBehaviour
                 .FindObjectsOfTypeAll<GameObject>()
                 .FirstOrDefault(g=>g.CompareTag("Snake"));
         }
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Balloon"));
+        }
+
+        if (current_phobie == null) {
+            current_phobie = Resources
+                .FindObjectsOfTypeAll<GameObject>()
+                .FirstOrDefault(g=>g.CompareTag("Fence"));
+        }
+
+        return current_phobie;
+    }
+
+    /// <summary>
+    /// Show the current phobie GameObject
+    /// </summary>
+    public void ShowClientGameObject(){
+        var current_phobie = this.GetCurrentPhobie();
 
         if (current_phobie != null){
             current_phobie.SetActive(true);
         }
     }
 
-    public void UpdateData(String sound_name, String skybox_name)
-    {
-        Debug.Log("UpdateSoundAndSkybox from client...");
-        UpdateSoundAndSkybox(sound_name, skybox_name);
+    /// <summary>
+    /// Hide the current phobie GameObject
+    /// </summary>
+    public void HideClientGameObject(){
+        var current_phobie = this.GetCurrentPhobie();
+
+        if (current_phobie != null){
+            current_phobie.SetActive(false);
+        }
     }
 
-    public void UpdatePhobie(String levelChoice, int level_difficulty)
-    {
-        Debug.Log("UpdateGameObject from client...");
-        UpdateGameObject(levelChoice, level_difficulty);
-    }
+    /// <summary>
+    /// Remove GameObject of Snake and Spider
+    /// </summary>
+    public void RemovePhobieGameObject(){
+        var current_phobie = this.GetCurrentPhobie();
 
-    public void DeleteData(){
-        Debug.Log("DeleteSoundAndSkyBox from client...");
-        DeleteSoundAndSkyBox();
-    }
-
-    public void DeletePhobie(){
-        Debug.Log("DeleteGameObject from client...");
-        RemoveGameObject();
-    }
-
-    public void Comfort(bool is_active, String previous_skybox, String current_level){
-        if (!is_active){
-            Debug.Log("Comfort from client...");
-            DeactivateLevel(current_level);
-            is_active = true;
-        } else {
-            Debug.Log("Reactive from client...");
-            ReactivateLevel(previous_skybox);
-            is_active = false;
+        if (current_phobie != null){
+            Destroy(current_phobie);
         }
     }
 }

@@ -7,7 +7,11 @@ using Mirror;
 using System;
 
 using static LevelDifficulty;
+using static DataSync;
 
+/// <summary>
+/// This class launches the simulation of a level
+/// </summary>
 public class LevelStart : MonoBehaviour
 {
     public GameObject levelChoice;
@@ -17,22 +21,25 @@ public class LevelStart : MonoBehaviour
     public int minValue = 1;
     public int maxValue = 8;
 
-    // Start is called before the first frame update
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
     void Start()
     {
         Button btn = startLevel.GetComponent<Button>();
 		btn.onClick.AddListener(LoadLevel);
     }
 
+    /// <summary>
+    /// Load the level selected for server side
+    /// </summary>
     void LoadLevel(){
         // round to int to catch floating point problems.
         var level_difficulty = Mathf.RoundToInt(difficulty.value * (maxValue - minValue) + minValue);
 
         Debug.Log(levelChoice.tag);
         Debug.Log(level_difficulty);
-
-        AudioClip sound = null;
-        Material skybox = null;
+        
         String sound_name = null;
         String skybox_name = null;
 
@@ -42,27 +49,18 @@ public class LevelStart : MonoBehaviour
         Debug.Log(skybox_name);
         Debug.Log(sound_name);
 
-        sound = Resources.Load($"sounds/{sound_name}") as AudioClip;
-        skybox = Resources.Load($"materials/{skybox_name}") as Material;
-
-        // Add music to play (server side)
-        GameObject music = new GameObject("Music_server");
-        music.AddComponent<AudioSource>();
-        music.GetComponent<AudioSource>().clip = sound;
-        music.GetComponent<AudioSource>().loop = true;
-        music.GetComponent<AudioSource>().Play();
-
-        // Update Skybox (server side)
-        RenderSettings.skybox = skybox;
+        DataSync dataSync = new DataSync();
+        dataSync.CreateSound(sound_name, "Music_server");
+        dataSync.UpdateSkybox(skybox_name);
 
         // Update Sound and Skybox (CLIENT SIDE !)
         GameObject skyboxPlayer = GameObject.Find("skyboxPlayer");
-        skyboxPlayer.AddComponent<DataSync>();
-        skyboxPlayer.GetComponent<DataSync>().UpdateData(sound_name, skybox_name);
+        skyboxPlayer.AddComponent<ClientSync>();
+        skyboxPlayer.GetComponent<ClientSync>().UpdateData(sound_name, skybox_name);
 
         // Update GameObject (CLIENT SIDE !)
         GameObject phobiePlayer = GameObject.Find("phobiePlayer");
-        phobiePlayer.AddComponent<DataSync>();
-        phobiePlayer.GetComponent<DataSync>().UpdatePhobie(levelChoice.tag, level_difficulty);
+        phobiePlayer.AddComponent<ClientSync>();
+        phobiePlayer.GetComponent<ClientSync>().UpdatePhobie(levelChoice.tag, level_difficulty);
     }
 }
