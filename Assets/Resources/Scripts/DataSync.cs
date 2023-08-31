@@ -230,9 +230,9 @@ public class DataSync : MonoBehaviour
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_4") as GameObject;
                     Vector3 balloonPosition;
                     if (isServer){
-                        balloonPosition = new Vector3(18, -28, 0);
+                        balloonPosition = new Vector3(18, -27, 0);
                     } else {
-                        balloonPosition = new Vector3(18, -25, 0);
+                        balloonPosition = new Vector3(18, -30, 0);
                     }
                     
                     current_phobie = Instantiate(balloonPrefab);
@@ -264,9 +264,9 @@ public class DataSync : MonoBehaviour
                     var balloonPrefab = Resources.Load("prefabs/acrophobie/balloon_level_8") as GameObject;
                     Vector3 balloonPosition;
                     if (isServer){
-                        balloonPosition = new Vector3(15, -22, 0);
+                        balloonPosition = new Vector3(15, -27, 0);
                     } else {
-                        balloonPosition = new Vector3(15, -22, 0);
+                        balloonPosition = new Vector3(15, -27, 0);
                     }
                     
                     current_phobie = Instantiate(balloonPrefab);
